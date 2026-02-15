@@ -39,102 +39,152 @@
         </nav>
     </header>
 
-    <main>
-        <section>
-            <div class="max-w-4xl my-10 mx-auto border border-sky-300 rounded-xl bg-white/80 p-10 flex flex-col ">
-                <p class="text-lg font-semibold mb-4">Profile Info</p>
 
-                <div class="flex gap-6 items-start min-w-[500px]">
 
-                    <img src="./rsc/profile.jpg" alt="profile image"
-                        class="w-32 h-32 rounded-lg object-cover border border-sky-200">
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-8">
+        <div class="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto items-stretch">
 
-                    <div class="grid grid-cols-[120px_auto_1fr] gap-y-2">
-                        <div class="font-medium">Name</div>
-                        <div class="border-l mx-2"></div>
-                        <div>Ando Choi</div>
+            <aside class="w-full md:w-[260px] lg:w-[280px] shrink-0 flex">
+                <div
+                    class="flex-1 border border-sky-300 rounded-xl bg-white/80 p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <p class="text-lg font-bold text-sky-700 mb-6">Profile Info</p>
+                        <div class="flex flex-col items-center text-center">
+                            <img src="./rsc/profile.jpg" alt="profile image"
+                                class="w-32 h-32 rounded-2xl object-cover border border-sky-200 mb-6 shadow-sm">
 
-                        <div class="font-medium">Job</div>
-                        <div class="border-l mx-2"></div>
-                        <div>Full stack engineer</div>
+                            <div class="grid grid-cols-[80px_1px_1fr] gap-y-3 text-sm text-left w-full">
+                                <div class="font-bold text-gray-500">Name</div>
+                                <div class="bg-gray-200"></div>
+                                <div class="pl-4 text-gray-800">Ando Choi</div>
 
-                        <div class="font-medium">Age</div>
-                        <div class="border-l mx-2"></div>
-                        <div>30</div>
+                                <div class="font-bold text-gray-500">Job</div>
+                                <div class="bg-gray-200"></div>
+                                <div class="pl-4 text-gray-800 font-medium">Full stack engineer</div>
 
-                        <div class="font-medium">Edu</div>
-                        <div class="border-l mx-2"></div>
-                        <div>Recode</div>
+                                <div class="font-bold text-gray-500">Age</div>
+                                <div class="bg-gray-200"></div>
+                                <div class="pl-4 text-gray-800">30</div>
 
+                                <div class="font-bold text-gray-500">Edu</div>
+                                <div class="bg-gray-200"></div>
+                                <div class="pl-4 text-gray-800">Recode</div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+            </aside>
+
+            <section class="flex-1 w-full flex flex-col space-y-6">
+
+                <article class="flex-1 border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                    <h3 class="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
+                    <div class="flex gap-6">
+                        <a href="#"><img src="./rsc/github.png" class="w-12 h-12"></a>
+                        <a href="#"><img src="./rsc/notion.png" class="w-12 h-12"></a>
+                    </div>
+                </article>
+
+                <article class="flex-1 border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                    <h3 class="text-lg font-bold text-sky-700 mb-6">My Links</h3>
+                    <div class="flex gap-6">
+                        <a href="#"><img src="./rsc/github.png" class="w-12 h-12"></a>
+                        <a href="#"><img src="./rsc/notion.png" class="w-12 h-12"></a>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+
+        <section>
+            <div class="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                <div class="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">Archive</div>
 
         </section>
 
         <section>
+            <div class="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                <div class="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">Career</div>
 
-            <div class="max-w-4xl my-10 mx-auto border border-sky-300 rounded-xl bg-white/80 p-10 flex flex-col ">
-                <div class="text-lg font-semibold mb-4">My Links</div>
-
-                <div class="flex gap-6 items-start min-w-[500px]">
-                    <div class="flex gap-4 items-center">
-
-                        <a href="#">
-                            <img src="./rsc/github.png" alt="GitHub" class="w-auto h-auto max-h-12 max-w-12">
-                        </a>
-
-                        <a href="#">
-                            <img src="./rsc/notion.png" alt="Notion" class="w-auto h-auto max-h-12 max-w-12">
-                        </a>
-
+                <div
+                    class="grid grid-cols-1 md:grid-cols-[1fr_1px_2fr_1px_2fr_1px_1.5fr] gap-x-4 gap-y-6 items-center w-full">
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Company</span>
+                        <span class="font-bold text-gray-800 text-lg">Huinsystec</span>
                     </div>
 
+                    <div class="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Work
+                            Experience</span>
+                        <span class="font-medium text-gray-700">Android SI: SDK, NDK</span>
+                    </div>
+
+                    <div class="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Sub
+                            Experience</span>
+                        <span class="font-medium text-gray-700">Microchip: Arduino Builder</span>
+                    </div>
+
+                    <div class="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Date</span>
+                        <span
+                            class="font-bold text-sky-600 whitespace-nowrap bg-sky-50 px-3 py-1 rounded-full text-center">2023.12
+                            - 2025.12</span>
+                    </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
+        <div class="max-w-4xl my-10 mx-auto border border-sky-300 rounded-xl bg-white/80 p-10 flex flex-col relative">
+            <div class="text-lg font-semibold mb-4 text-slate-800">Contact</div>
 
+            <div class="flex items-center gap-x-3 group w-fit">
+                <img src="rsc/mail_50dp.png" alt="Email" class="w-5 h-5">
 
+                <span id="emailText" class="text-sky-600 font-medium">cektjtro@gmail.com</span>
 
-        <div class="max-w-4xl my-10 mx-auto border border-sky-300 rounded-xl bg-white/80 p-10 flex flex-col">
-            <div class="text-lg font-semibold mb-4">Career</div>
+                <button type="button" onclick="copyToClipboard()"
+                    class="hover:bg-sky-100 p-1.5 rounded-md transition-all active:scale-95 group/btn" title="이메일 복사">
+                    <img src="rsc/content_copy_50dp.png" alt="Copy" class="w-4 h-4 group-hover/btn:opacity-100">
+                </button>
+            </div>
 
-            <div class="grid grid-cols-[auto_1px_auto_1px_auto_1px_auto] gap-x-4 items-center w-full">
-
-                <div class="flex flex-col">
-                    <span class="text-xs text-gray-500">Company</span>
-                    <span class="font-medium">Huinsystec</span>
-                </div>
-
-                <div class="w-[1px] h-8 bg-sky-200"></div>
-
-                <div class="flex flex-col">
-                    <span class="text-xs text-gray-500">Work Experience</span>
-                    <span class="font-medium">Android SI: SDK, NDK</span>
-                </div>
-
-                <div class="w-[1px] h-8 bg-sky-200"></div>
-
-                <div class="flex flex-col">
-                    <span class="text-xs text-gray-500">Sub Experience</span>
-                    <span class="font-medium">Microchip: Arduino Builder</span>
-                </div>
-
-                <div class="w-[1px] h-8 bg-sky-200"></div>
-
-                <div class="flex flex-col">
-                    <span class="text-xs text-gray-500">Date</span>
-                    <span class="font-medium whitespace-nowrap">2023.12 - 2025.12</span>
-                </div>
-
+            <div id="toast"
+                class="invisible fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full text-sm shadow-lg transition-all duration-300 opacity-0 transform translate-y-2">
+                이메일 주소가 복사되었습니다! ✨
             </div>
         </div>
-
-
     </footer>
+
+    <script>
+        function copyToClipboard() {
+            const email = document.getElementById('emailText').innerText;
+            const toast = document.getElementById('toast');
+
+            navigator.clipboard.writeText(email).then(() => {
+                toast.classList.remove('invisible', 'opacity-0', 'translate-y-2');
+                toast.classList.add('opacity-100', 'translate-y-0');
+
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                    toast.classList.add('opacity-0', 'translate-y-2');
+
+                    setTimeout(() => {
+                        toast.classList.add('invisible');
+                    }, 300);
+                }, 2000);
+            });
+        }
+    </script>
 
 </body>
 
