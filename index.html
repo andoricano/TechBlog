@@ -7,6 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./post/post_manager.js" defer></script>
 </head>
 
 <body class="bg-gray-50 text-sky-800 antialiased">
@@ -74,25 +75,23 @@
                     </div>
                 </div>
             </aside>
-
             <section class="flex-1 w-full flex flex-col space-y-6">
-
-                <article class="flex-1 border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                <article class="flex-[4] border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
                     <h3 class="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
                     <div class="flex gap-6">
-                        <a href="#"><img src="./rsc/github.png" class="w-12 h-12"></a>
-                        <a href="#"><img src="./rsc/notion.png" class="w-12 h-12"></a>
+                        <div id="recent-project"></div>
+
                     </div>
                 </article>
-
-                <article class="flex-1 border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
-                    <h3 class="text-lg font-bold text-sky-700 mb-6">My Links</h3>
-                    <div class="flex gap-6">
-                        <a href="#"><img src="./rsc/github.png" class="w-12 h-12"></a>
-                        <a href="#"><img src="./rsc/notion.png" class="w-12 h-12"></a>
-                    </div>
+                <article class="flex-[1] border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
+                    <h3 class="flex items-center gap-6 text-lg font-bold text-sky-700">
+                        My Links
+                        <div class="flex gap-4">
+                            <a href="#"><img src="./rsc/github.png" class="w-10 h-10"></a>
+                            <a href="#"><img src="./rsc/notion.png" class="w-10 h-10"></a>
+                        </div>
+                    </h3>
                 </article>
-
             </section>
         </div>
 
@@ -100,7 +99,7 @@
             <div class="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
                 <div class="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">Archive</div>
                 <div id="archive-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
+
                 </div>
         </section>
         <script src="./post/post_manager.js"></script>
