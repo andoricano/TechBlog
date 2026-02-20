@@ -1,5 +1,16 @@
 [
   {
+    "_comment": "고유 ID 형식: 날짜_순번",
+    "id": "20260215_1",
+    "title": "첫 번째 블로그 글",
+    "content": "md",
+    "_content_note": "콘텐츠는 마크다운(.md) 파일명 또는 마크다운 본문을 의미함",
+    "tags": ["JSON", "Web"],
+    "createdAt": "2026-02-15",
+    "thumbnailUrl": "/images/thumb1.jpg",
+    "description": "이 글은 JSON 데이터를 웹에 표시하는 방법을 다룹니다."
+  },
+  {
     "id": "20260215_1",
     "title": "첫 번째 블로그 글",
     "content": "md",
