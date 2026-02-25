@@ -1,0 +1,12 @@
+{
+    "id": "20260215_1",
+    "title": "첫 번째 블로그 글",
+    "content": "md",
+    "tags": [
+        "JSON",
+        "Web"
+    ],
+    "createdAt": "2026-02-15",
+    "thumbnailUrl": "/images/thumb1.jpg",
+    "description": "1"
+}

@@ -1,0 +1,12 @@
+{
+    "id": "YYYYMMDD_N",
+    "title": "String",
+    "content": "markdown format",
+    "tags": [
+        "string",
+        "string"
+    ],
+    "createdAt": "YYYY-MM-DD",
+    "thumbnailUrl": "path",
+    "description": "2"
+}
