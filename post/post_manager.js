@@ -46,5 +46,5 @@ async function loadPosts(containerId, limit = null) {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadPosts('recent-project', 1);
-    loadPosts('archive-list');
+    loadPosts('archive-list', 4);
 });
