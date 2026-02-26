@@ -99,7 +99,7 @@
         <section>
             <div class="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
                 <div class="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">Archive</div>
-                <div id="archive-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="archive-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 </div>
                 <div class="mt-8 flex justify-center">
@@ -115,7 +115,12 @@
                     </a>
                 </div>
         </section>
-        <script src="./post/post_manager.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                loadPosts('recent-project', 1, './post/data');
+                loadPosts('archive-list', 6, './post/data');
+            });
+        </script>
 
         <section>
             <div class="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">

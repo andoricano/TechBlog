@@ -1,0 +1,12 @@
+{
+    "id": "20260227052454_0001",
+    "title": "0001번째 블로그 글",
+    "content": "md",
+    "tags": [
+        "JSON",
+        "Web"
+    ],
+    "createdAt": "202602270524",
+    "thumbnailUrl": "/images/thumb1.jpg",
+    "description": "0001"
+}
