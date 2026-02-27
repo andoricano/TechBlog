@@ -24,8 +24,8 @@ function syncListJson() {
     console.log(`[동기화 완료] 총 ${folders.length}개의 포스트가 list.json에 반영되었습니다.`);
 }
 
+
 function generatePost() {
-    // ... 기존 날짜 및 ID 생성 로직 ...
     const now = new Date();
     const YYYY = now.getFullYear();
     const MM = String(now.getMonth() + 1).padStart(2, '0');
@@ -44,25 +44,33 @@ function generatePost() {
     const folderId = `id${timestamp}${nextSeq}`;
     const dirPath = path.join(dataDir, folderId);
 
+    // 1. 포스트 메인 폴더 생성
     fs.mkdirSync(dirPath, { recursive: true });
+
+    // 2. 포스트 내부 images 폴더 생성
+    const imagesDir = path.join(dirPath, 'images');
+    fs.mkdirSync(imagesDir, { recursive: true });
 
     const postData = {
         "id": `${timestamp}_${nextSeq}`,
         "title": `${nextSeq}번째 블로그 글`,
         "tags": ["JSON", "Web"],
         "createdAt": `${dateStr}${HH}${mm}`,
-        "thumbnailUrl": "/images/thumb1.jpg",
+        // 3. 썸네일 경로를 내부 images 폴더 기준으로 변경
+        "thumbnailUrl": "images/thumb1.jpg",
         "description": `${nextSeq}`
     };
 
     fs.writeFileSync(path.join(dirPath, 'data.json'), JSON.stringify(postData, null, 4), 'utf8');
     fs.writeFileSync(path.join(dirPath, 'content.md'), `# ${postData.title}\n\n내용을 입력하세요.`, 'utf8');
 
-    // 개별 추가 대신 전체 동기화 실행
     syncListJson();
 
     console.log(`[생성 완료] 경로: ${dirPath}`);
+    console.log(`[폴더 생성] 이미지 경로: ${imagesDir}`);
 }
+
+
 
 // 스크립트 실행 시 새 글 생성 (필요에 따라 syncListJson()만 단독 호출 가능)
 generatePost();
