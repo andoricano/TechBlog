@@ -74,22 +74,72 @@ async function loadPosts(containerId, count = 6, basePath = './data', page = 1, 
 }
 
 
+
 async function initPostDetail(postId, basePath = './data') {
     try {
-        const res = await fetch(`${basePath}/${postId}/data.json`);
-        if (!res.ok) throw new Error();
-        const data = await res.json();
+        const [resData, resContent] = await Promise.all([
+            fetch(`${basePath}/${postId}/data.json`),
+            fetch(`${basePath}/${postId}/content.md`)
+        ]);
 
+        if (!resData.ok || !resContent.ok) throw new Error();
+
+        const data = await resData.json();
+        const markdown = await resContent.text();
+
+        const toc = [];
+        // 커스텀 렌더러 설정
+        const renderer = new marked.Renderer();
+
+        // 헤더 렌더링 방식 정의 (id 부여 및 toc 수집)
+        renderer.heading = ({ text, depth }) => {
+            const anchorId = text.toLowerCase().replace(/[^\wㄱ-ㅎㅏ-ㅣ가-힣]+/g, '-');
+
+            if (depth <= 2) {
+                toc.push({ level: depth, text, anchorId });
+            }
+
+            return `<h${depth} id="${anchorId}" class="scroll-mt-20 font-bold text-slate-800 mt-8 mb-4">${text}</h${depth}>`;
+        };
+
+        // marked 옵션 적용
+        marked.setOptions({ renderer });
+
+        // 마크다운 변환
+        const htmlContent = marked.parse(markdown);
+
+        // 1. 메타데이터 반영
         document.title = `${data.title} - AndoTechBlog`;
         document.getElementById('post-title').textContent = data.title;
         document.getElementById('post-date').textContent = data.createdAt;
 
-        document.getElementById('post-tags').innerHTML = data.tags
-            .map(t => `<span class="px-3 py-1 bg-sky-50 text-sky-600 rounded-full text-xs font-semibold">#${t}</span>`).join('');
+        if (data.tags) {
+            document.getElementById('post-tags').innerHTML = data.tags
+                .map(t => `<span class="px-3 py-1 bg-sky-50 text-sky-600 rounded-full text-xs font-semibold">#${t}</span>`)
+                .join('');
+        }
 
-        document.getElementById('post-content').innerHTML =
-            `<div class="whitespace-pre-wrap text-slate-700 leading-relaxed">${data.content}</div>`;
+        // 2. 본문 삽입 (로딩 메시지 제거됨)
+        document.getElementById('post-content').innerHTML = `
+            <div class="markdown-body text-slate-700 leading-relaxed">
+                ${htmlContent}
+            </div>`;
+
+        // 3. 목차(TOC) 생성
+        const tocContainer = document.getElementById('post-toc');
+        if (tocContainer && toc.length > 0) {
+            const tocHtml = toc.map(item => `
+                <li class="${item.level === 2 ? 'ml-4' : ''} mb-2">
+                    <a href="#${item.anchorId}" class="hover:text-sky-500 transition-colors block">
+                        ${item.text}
+                    </a>
+                </li>
+            `).join('');
+            tocContainer.innerHTML = `<ul class="text-sm text-slate-500 border-l-2 border-slate-100 pl-4">${tocHtml}</ul>`;
+        }
+
     } catch (err) {
+        console.error("로딩 실패:", err);
         document.getElementById('post-title').textContent = "오류 발생";
         document.getElementById('post-content').innerHTML = `<p class="text-red-400 text-center mt-20">데이터 로드 실패</p>`;
     }
