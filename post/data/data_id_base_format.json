@@ -1,6 +1,9 @@
 {
     "id": "YYYYMMDD_N",
     "title": "String",
+    "category": [
+        "Tech"
+    ],
     "tags": [
         "string",
         "string"

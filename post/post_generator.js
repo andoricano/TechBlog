@@ -54,6 +54,7 @@ function generatePost() {
     const postData = {
         "id": `${timestamp}_${nextSeq}`,
         "title": `${nextSeq}번째 블로그 글`,
+        "category": ["Tech"], // 기본 카테고리 설정
         "tags": ["JSON", "Web"],
         "createdAt": `${dateStr}${HH}${mm}`,
         // 3. 썸네일 경로를 내부 images 폴더 기준으로 변경
