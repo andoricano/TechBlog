@@ -10,7 +10,7 @@ function App() {
       <div className="min-h-screen bg-gray-50">
         <Header />
 
-        <main className="max-w-6xl mx-auto px-6 py-10">
+        <main className="max-w-7xl mx-auto px-6 py-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/archive" element={<ArchiveList />} />
