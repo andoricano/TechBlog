@@ -1,31 +1,73 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LinkBox from '../components/common/LinkBox';
+import ThumbnailPostCard from '../components/common/ThumnailPostCard';
+import ArchiveBox from '../components/common/ArchiveBox';
+import ContactBox from '../components/common/ContactBox';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
+    const handlePostClick = (id: string) => {
+        navigate(`/post?id=${id}`);
+    };
 
-    const myLinks = [
-        { imgSrc: '/rsc/github.png', url: 'https://github.com/andoricano' },
+    const allPostsData = [
+        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
+        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
+        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
+        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
+        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
+        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
+
     ];
-
     return (
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col gap-8 w-full">
 
-            <ProfileCard />
+            <section className="flex flex-col md:flex-row gap-8 w-full items-stretch">
+                <div className="flex-1 min-w-[300px]">
+                    <ProfileCard />
+                </div>
 
-            <section className="flex-1 w-full flex flex-col space-y-6">
-
-                <article className="flex-[4] border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
-                    <h3 className="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
-                    <div id="recent-project"></div>
-                </article>
-
+                <div className="flex-[4] w-full">
+                    <Progress />
+                </div>
             </section>
+
+
+
+            <section className="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm flex flex-col">
+                <div className="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">
+                    Archive
+                </div>
+
+                <ArchiveBox col={3} row={2} posts={allPostsData} />
+
+                <div className="mt-8 flex justify-center">
+                    <button
+                        type="button"
+                        onClick={() => navigate('/archive')}
+                        className="group relative z-30 cursor-pointer pointer-events-auto px-8 py-2.5 text-sm font-semibold text-sky-600 border border-sky-200 rounded-full bg-white hover:bg-sky-50 hover:border-sky-300 hover:shadow-md transition-all duration-300 flex items-center gap-2"
+                    >
+                        <span className="relative z-10">전체 아카이브 보기</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <Career />
+            <ContactBox />
+
         </div>
     );
 };
-
 
 const ProfileCard: React.FC = () => {
     return (
@@ -72,5 +114,85 @@ const ProfileCard: React.FC = () => {
         </aside>
     );
 };
+
+
+const Progress: React.FC = () => {
+    const dummyPosts = [
+        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
+        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
+        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
+    ];
+
+    return (
+        <article className="flex-[4] w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm h-full">
+            <h3 className="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                {dummyPosts.map((post) => (
+                    <ThumbnailPostCard
+                        key={post.id}
+                        post={post}
+                        onClick={(id) => console.log(id)}
+                    />
+                ))}
+            </div>
+        </article>
+    );
+};
+
+const Career: React.FC = () => {
+    return (
+        <section className="w-full h-full">
+            <div className="w-full h-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm flex flex-col">
+                <div className="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">
+                    Career
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_2fr_1px_2fr_1px_1.5fr] gap-x-4 gap-y-6 items-center w-full my-auto">
+
+                    {/* Company */}
+                    <div className="flex flex-col">
+                        <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Company</span>
+                        <span className="font-bold text-gray-800 text-lg">Huinsystec</span>
+                    </div>
+
+                    {/* Divider 1 */}
+                    <div className="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    {/* Work Experience */}
+                    <div className="flex flex-col">
+                        <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Work Experience</span>
+                        <span className="font-medium text-gray-700">Android SI: SDK, NDK</span>
+                    </div>
+
+                    {/* Divider 2 */}
+                    <div className="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    {/* Sub Experience */}
+                    <div className="flex flex-col">
+                        <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Sub Experience</span>
+                        <span className="font-medium text-gray-700">Microchip: Arduino Builder</span>
+                    </div>
+
+                    {/* Divider 3 */}
+                    <div className="hidden md:block w-[1px] h-10 bg-sky-200"></div>
+
+                    {/* Date */}
+                    <div className="flex flex-col">
+                        <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Date</span>
+                        <span className="font-bold text-sky-600 whitespace-nowrap bg-sky-50 px-3 py-1 rounded-full text-center">
+                            2023.12 - 2025.12
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+
+
+
+
 
 export default Home;
