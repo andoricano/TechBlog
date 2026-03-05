@@ -1,0 +1,14 @@
+{
+    "id": "202603051324000001",
+    "title": "0001번째 블로그 글",
+    "category": [
+        "Tech"
+    ],
+    "tags": [
+        "JSON",
+        "Web"
+    ],
+    "createdAt": "202603051324",
+    "thumbnailUrl": "images/thumb1.jpg",
+    "description": "0001번째 포스트 요약입니다."
+}

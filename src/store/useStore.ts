@@ -4,8 +4,7 @@ import { makeTagList } from '../services/util';
 
 
 export interface Post {
-  id: string;
-  folderId: string;
+  id: string;          
   title: string;
   category: string[];
   tags: string[];

@@ -1,5 +1,5 @@
 {
-    "id": "20260228224043_0002",
+    "id": "202603051327430002",
     "title": "0002번째 블로그 글",
     "category": [
         "Tech"
@@ -8,7 +8,7 @@
         "JSON",
         "Web"
     ],
-    "createdAt": "202602282240",
+    "createdAt": "202603051327",
     "thumbnailUrl": "images/thumb1.jpg",
-    "description": "0002"
+    "description": "0002번째 포스트 요약입니다."
 }

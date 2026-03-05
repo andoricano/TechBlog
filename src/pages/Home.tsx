@@ -136,9 +136,9 @@ const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 {posts.map((post) => (
                     <ThumbnailPostCard
-                        key={post.folderId}
+                        key={post.id}
                         post={post}
-                        onClick={() => onPostClick(post.folderId)}
+                        onClick={() => onPostClick(post.id)}
                     />
                 ))}
             </div>

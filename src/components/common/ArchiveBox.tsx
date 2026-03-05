@@ -32,9 +32,9 @@ const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) =>
             {displayPosts.length > 0 ? (
                 displayPosts.map((post) => (
                     <ThumbnailPostCard
-                        key={post.folderId}
+                        key={post.id}
                         post={post}
-                        onClick={() => onPostClick(post.folderId)}
+                        onClick={() => onPostClick(post.id)}
                     />
                 ))
             ) : (
