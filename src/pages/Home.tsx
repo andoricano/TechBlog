@@ -1,46 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LinkBox from '../components/common/LinkBox';
 import ThumbnailPostCard from '../components/common/ThumnailPostCard';
 import ArchiveBox from '../components/common/ArchiveBox';
 import ContactBox from '../components/common/ContactBox';
+import { Post, useStore } from '../store/useStore';
+
+
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
+
+    // 1. 스토어에서 데이터 및 로직 구독
+    const posts = useStore((state) => state.posts);
+    const isLoading = useStore((state) => state.isLoading);
+    const fetchPosts = useStore((state) => state.fetchPosts);
+
+    // 2. 컴포넌트 마운트 시 데이터 fetch
+    useEffect(() => {
+        fetchPosts();
+    }, [fetchPosts]);
+
     const handlePostClick = (id: string) => {
         navigate(`/post?id=${id}`);
     };
 
-    const allPostsData = [
-        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
-        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
-        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
-        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
-        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
-        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
-
-    ];
     return (
         <div className="flex flex-col gap-8 w-full">
-
+            {/* 상단 섹션: 프로필 & 진행중인 프로젝트 */}
             <section className="flex flex-col md:flex-row gap-8 w-full items-stretch">
                 <div className="flex-1 min-w-[300px]">
                     <ProfileCard />
                 </div>
 
                 <div className="flex-[4] w-full">
-                    <Progress />
+                    {/* 최신 데이터 3개만 잘라서 Progress에 전달 */}
+                    <Progress posts={posts.slice(0, 3)} onPostClick={handlePostClick} />
                 </div>
             </section>
 
-
-
+            {/* 아카이브 섹션 */}
             <section className="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm flex flex-col">
                 <div className="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">
                     Archive
                 </div>
 
-                <ArchiveBox col={3} row={2} posts={allPostsData} />
+                {/* 전체 posts 전달 (ArchiveBox 내부에서 col*row 만큼 알아서 자름) */}
+                <ArchiveBox col={3} row={2} posts={posts} onPostClick={handlePostClick} />
 
                 <div className="mt-8 flex justify-center">
                     <button
@@ -64,10 +70,11 @@ const Home: React.FC = () => {
 
             <Career />
             <ContactBox />
-
         </div>
     );
 };
+
+
 
 const ProfileCard: React.FC = () => {
     return (
@@ -116,23 +123,22 @@ const ProfileCard: React.FC = () => {
 };
 
 
-const Progress: React.FC = () => {
-    const dummyPosts = [
-        { id: '1', title: '0001번째 프로젝트', category: ['Tech'], tags: ['React'], createdAt: '2026-03-04', thumbnailUrl: '', description: '가로를 꽉 채우는 테스트입니다.' },
-        { id: '2', title: '0002번째 프로젝트', category: ['Design'], tags: ['UI'], createdAt: '2026-03-04', thumbnailUrl: '', description: '그리드 시스템을 적용합니다.' },
-        { id: '3', title: '0003번째 프로젝트', category: ['Web'], tags: ['Vite'], createdAt: '2026-03-04', thumbnailUrl: '', description: '3열 정렬 확인.' },
-    ];
+interface ProgressProps {
+    posts: Post[];
+    onPostClick: (id: string) => void;
+}
 
+const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
     return (
         <article className="flex-[4] w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm h-full">
             <h3 className="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                {dummyPosts.map((post) => (
+                {posts.map((post) => (
                     <ThumbnailPostCard
-                        key={post.id}
+                        key={post.folderId}
                         post={post}
-                        onClick={(id) => console.log(id)}
+                        onClick={() => onPostClick(post.folderId)}
                     />
                 ))}
             </div>

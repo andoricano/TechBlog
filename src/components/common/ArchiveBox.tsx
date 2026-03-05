@@ -1,27 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ThumbnailPostCard from './ThumnailPostCard';
+import { Post } from '../../store/useStore';
 
-interface PostData {
-    id: string;
-    title: string;
-    category: string[];
-    tags: string[];
-    createdAt: string;
-    thumbnailUrl: string;
-    description: string;
-}
 
 interface ArchiveProps {
-    col: number; // 한 줄에 몇 개를 보여줄지
-    row: number; // 몇 줄을 보여줄지 (총 개수 = col * row)
-    posts: PostData[]; // 표시할 포스트 데이터 리스트
+    col: number;
+    row: number;
+    posts: Post[];
+    onPostClick: (id: string) => void;
 }
 
-const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts }) => {
-    const navigate = useNavigate();
 
-    // col 값에 따른 Tailwind class 매핑 (동적 클래스 생성을 위해)
+
+
+const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) => {
+    // col 값에 따른 Tailwind class 매핑
     const gridColsClass = {
         1: 'grid-cols-1',
         2: 'grid-cols-1 md:grid-cols-2',
@@ -34,24 +28,24 @@ const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts }) => {
     const displayPosts = posts.slice(0, displayLimit);
 
     return (
-        <section className="w-full">
-            <div className="w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm">
-                <div className="text-lg font-bold text-sky-700 mb-6 border-b border-sky-100 pb-2">
-                    Archive
+        <div className={`grid ${gridColsClass} gap-6 w-full`}>
+            {displayPosts.length > 0 ? (
+                displayPosts.map((post) => (
+                    <ThumbnailPostCard
+                        key={post.folderId}
+                        post={post}
+                        onClick={() => onPostClick(post.folderId)}
+                    />
+                ))
+            ) : (
+                <div className="col-span-full py-20 text-center text-slate-400">
+                    아카이브된 포스트가 없습니다.
                 </div>
-
-                <div className={`grid ${gridColsClass} gap-6`}>
-                    {displayPosts.map((post) => (
-                        <ThumbnailPostCard
-                            key={post.id}
-                            post={post}
-                            onClick={(id) => navigate(`/post?id=${id}`)}
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
+            )}
+        </div>
     );
 };
+
+
 
 export default ArchiveBox;
