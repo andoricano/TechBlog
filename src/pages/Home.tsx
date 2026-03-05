@@ -4,7 +4,8 @@ import LinkBox from '../components/common/LinkBox';
 import ThumbnailPostCard from '../components/common/ThumnailPostCard';
 import ArchiveBox from '../components/common/ArchiveBox';
 import ContactBox from '../components/common/ContactBox';
-import { Post, useStore } from '../store/useStore';
+import { Post } from '../services/util';
+import { useStore } from '../store/useStore';
 
 
 

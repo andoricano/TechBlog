@@ -1,4 +1,4 @@
-import { Post } from '../store/useStore';
+import { Post } from "./util";
 
 export const loadPostsByIds = async (path: string, folderIds: string[]): Promise<Post[]> => {
   try {

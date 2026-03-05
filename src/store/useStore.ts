@@ -1,31 +1,24 @@
 import { create } from 'zustand';
 import { loadPostsByIds } from '../services/loadPost';
-import { makeTagList } from '../services/util';
+import { CategoryItem, CategoryTreeItem, makeCategoryTree, makeTagList } from '../services/util';
+import { Post } from '../services/util';
 
 
-export interface Post {
-  id: string;          
-  title: string;
-  category: string[];
-  tags: string[];
-  createdAt: string;
-  thumbnailUrl: string;
-  description: string;
-}
 
 interface AppState {
   posts: Post[];
   tagMap: string[];
-  categoryMap: string[];
+  categoryMap: CategoryItem[];
+  categoryTree: CategoryTreeItem[];
   isLoading: boolean;
   fetchPosts: (basePath?: string) => Promise<void>;
-  setCategoryMap: (list: string[]) => void;
+  fetchCategoryMap: () => Promise<void>;
 }
-
 export const useStore = create<AppState>((set) => ({
   posts: [],
   tagMap: [],
   categoryMap: [],
+  categoryTree: [],
   isLoading: false,
 
   fetchPosts: async (basePath = '/post/data') => {
@@ -36,7 +29,6 @@ export const useStore = create<AppState>((set) => ({
       const folderIds: string[] = await res.json();
 
       const validPosts = await loadPostsByIds(basePath, folderIds);
-      
       const uniqueTags = makeTagList(validPosts);
 
       set({
@@ -50,5 +42,22 @@ export const useStore = create<AppState>((set) => ({
     }
   },
 
-  setCategoryMap: (list) => set({ categoryMap: list }),
+  
+  fetchCategoryMap: async () => {
+  try {
+    const res = await fetch('/post/category_map.json');
+    const list: CategoryItem[] = await res.json();
+    
+    const tree = makeCategoryTree(list); 
+
+    set({ 
+      categoryMap: list,
+      categoryTree: tree 
+    });
+  } catch (err) {
+    console.error(err);
+  }
+},
+
+
 }));

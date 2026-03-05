@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Tech",
+    "parent": "master"
+  },
+  {
+    "name": "Report",
+    "parent": "Tech"
+  },
+  {
+    "name": "Web",
+    "parent": "Report"
+  },
+  {
+    "name": "Android",
+    "parent": "Report"
+  },
+  {
+    "name": "Unity",
+    "parent": "Report"
+  },
+  {
+    "name": "Language",
+    "parent": "Report"
+  },
+  {
+    "name": "js,ts",
+    "parent": "Language"
+  },
+  {
+    "name": "c,c++",
+    "parent": "Language"
+  },
+  {
+    "name": "Java",
+    "parent": "Language"
+  },
+  {
+    "name": "Python",
+    "parent": "Language"
+  },
+  {
+    "name": "C#",
+    "parent": "Language"
+  },
+  {
+    "name": "kotlin",
+    "parent": "Language"
+  },
+  {
+    "name": "Algorithm",
+    "parent": "Report"
+  },
+  {
+    "name": "Project",
+    "parent": "Tech"
+  },
+  {
+    "name": "Web",
+    "parent": "Project"
+  },
+  {
+    "name": "Android",
+    "parent": "Project"
+  },
+  {
+    "name": "Unity",
+    "parent": "Project"
+  },
+  {
+    "name": "Study",
+    "parent": "Tech"
+  },
+  {
+    "name": "Baekjoon",
+    "parent": "Study"
+  },
+  {
+    "name": "Programmers",
+    "parent": "Study"
+  }
+]

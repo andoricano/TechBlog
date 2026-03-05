@@ -1,6 +1,6 @@
 import React from 'react';
 import ThumbnailPostCard from './ThumnailPostCard';
-import { Post } from '../../store/useStore';
+import { Post } from '../../services/util';
 
 
 interface ArchiveProps {
