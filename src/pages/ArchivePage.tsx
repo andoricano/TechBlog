@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '../store/useStore';
+import { Post, useStore } from '../store/useStore';
 import ArchiveBox from '../components/common/ArchiveBox';
 
 
@@ -22,8 +22,8 @@ const ArchivePage: React.FC = () => {
 
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-    const handlePostClick = (id: string) => {
-        navigate(`/post?id=${id}`);
+    const handlePostClick = (post: Post) => {
+        navigate(`/post?id=${post.id}`, { state: { post } });
     };
 
     const handlePageChange = (pageNum: number) => {

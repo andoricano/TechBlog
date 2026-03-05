@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import ArchivePage from './pages/ArchivePage';
-import Post from './pages/Post';
+import PostPage from './pages/PostPage';
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/archive" element={<ArchivePage />} />
-            <Route path="/post" element={<Post />} />
+            <Route path="/post" element={<PostPage />} />
           </Routes>
         </main>
       </div>

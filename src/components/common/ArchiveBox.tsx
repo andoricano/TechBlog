@@ -7,7 +7,7 @@ interface ArchiveProps {
     col: number;
     row: number;
     posts: Post[];
-    onPostClick: (id: string) => void;
+    onPostClick: (post: Post) => void;
 }
 
 const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) => {
@@ -29,8 +29,7 @@ const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) =>
                 displayPosts.map((post) => (
                     <ThumbnailPostCard
                         key={post.id}
-                        post={post}
-                        onClick={() => onPostClick(post.id)}
+                        post={post} onClick={() => onPostClick(post)}
                     />
                 ))
             ) : (

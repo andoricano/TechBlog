@@ -20,8 +20,8 @@ const Home: React.FC = () => {
         fetchPosts();
     }, [fetchPosts]);
 
-    const handlePostClick = (id: string) => {
-        navigate(`/post?id=${id}`);
+    const handlePostClick = (post: Post) => {
+        navigate(`/post?id=${post.id}`, { state: { post } });
     };
 
     return (
@@ -45,7 +45,12 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* 전체 posts 전달 (ArchiveBox 내부에서 col*row 만큼 알아서 자름) */}
-                <ArchiveBox col={3} row={2} posts={posts} onPostClick={handlePostClick} />
+                <ArchiveBox
+                    col={3}
+                    row={2}
+                    posts={posts}
+                    onPostClick={handlePostClick}
+                />
 
                 <div className="mt-8 flex justify-center">
                     <button
@@ -124,7 +129,7 @@ const ProfileCard: React.FC = () => {
 
 interface ProgressProps {
     posts: Post[];
-    onPostClick: (id: string) => void;
+    onPostClick: (post: Post) => void;
 }
 
 const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
@@ -137,7 +142,7 @@ const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
                     <ThumbnailPostCard
                         key={post.id}
                         post={post}
-                        onClick={() => onPostClick(post.id)}
+                        onClick={() => onPostClick(post)}
                     />
                 ))}
             </div>
