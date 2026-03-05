@@ -13,7 +13,6 @@ const Home: React.FC = () => {
 
     // 1. 스토어에서 데이터 및 로직 구독
     const posts = useStore((state) => state.posts);
-    const isLoading = useStore((state) => state.isLoading);
     const fetchPosts = useStore((state) => state.fetchPosts);
 
     // 2. 컴포넌트 마운트 시 데이터 fetch

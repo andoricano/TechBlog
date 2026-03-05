@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import ThumbnailPostCard from './ThumnailPostCard';
 import { Post } from '../../store/useStore';
 
@@ -10,9 +9,6 @@ interface ArchiveProps {
     posts: Post[];
     onPostClick: (id: string) => void;
 }
-
-
-
 
 const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) => {
     // col 값에 따른 Tailwind class 매핑
