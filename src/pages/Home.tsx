@@ -4,12 +4,20 @@ import LinkBox from '../components/common/LinkBox';
 import ThumbnailPostCard from '../components/common/ThumnailPostCard';
 import ArchiveBox from '../components/common/ArchiveBox';
 import ContactBox from '../components/common/ContactBox';
-import { Post } from '../services/util';
+import { findPostsByIdList, Post } from '../services/util';
 import { useStore } from '../store/useStore';
 
 
+//진행중인 프로젝트 3개까지 띄우기 가능
+const HomeProjectList = [
+    "202603051324000001",
+    "202603051327430002",
+    "3"
+]
 
 const Home: React.FC = () => {
+
+
     const navigate = useNavigate();
 
     // 1. 스토어에서 데이터 및 로직 구독
@@ -37,7 +45,7 @@ const Home: React.FC = () => {
 
                 <div className="flex-[4] w-full">
                     {/* 최신 데이터 3개만 잘라서 Progress에 전달 */}
-                    <Progress posts={posts.slice(0, 3)} onPostClick={handlePostClick} />
+                    <Progress posts={findPostsByIdList(posts, HomeProjectList)} onPostClick={handlePostClick} />
                 </div>
             </section>
 

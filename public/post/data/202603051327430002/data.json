@@ -1,12 +1,13 @@
 {
     "id": "202603051327430002",
-    "title": "0002번째 블로그 글",
-    "category": "11",
+    "title": "Tech Blog에 대한 설계와 방향성",
+    "category": "16",
     "tags": [
-        "JSON",
+        "Blog",
+        "React",
         "Web"
     ],
     "createdAt": "202603051327",
-    "thumbnailUrl": "images/thumb1.jpg",
-    "description": "0002번째 포스트 요약입니다."
+    "thumbnailUrl": "images/thumb1.png",
+    "description": "Tech Blog를 어떻게 설계했는지 설명하고 앞으로 발전 방안에 대한 글입니다."
 }

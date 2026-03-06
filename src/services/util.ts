@@ -30,6 +30,15 @@ export const findPostById = (posts: Post[], id: string | null): Post | undefined
   return posts.find((post) => post.id === id);
 };
 
+/**
+ * ID 리스트를 기준으로 해당하는 포스트들을 찾는 함수
+ */
+export const findPostsByIdList = (posts: Post[], idList: string[]): Post[] => {
+  if (!idList || idList.length === 0) return [];
+  
+  return posts.filter((post) => idList.includes(post.id));
+};
+
 export interface CategoryItem {
   id: number;
   name: string;
