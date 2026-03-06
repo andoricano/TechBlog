@@ -41,7 +41,7 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
                 <div className="w-full">
                     {node.children.map((child) => (
                         <CategoryNode
-                            key={`${child.parent}-${child.name}`}
+                            key={`${child}-${child.name}`}
                             node={child}
                             depth={depth + 1}
                         />
@@ -78,7 +78,7 @@ const Explorer: React.FC = () => {
                 {categoryTree.length > 0 ? (
                     categoryTree.map((rootNode) => (
                         <CategoryNode
-                            key={`${rootNode.parent}-${rootNode.name}`}
+                            key={`${rootNode}-${rootNode.name}`}
                             node={rootNode}
                             depth={0}
                         />

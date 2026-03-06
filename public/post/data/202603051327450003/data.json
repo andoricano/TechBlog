@@ -1,9 +1,7 @@
 {
     "id": "202603051327450003",
     "title": "0003번째 블로그 글",
-    "category": [
-        "Tech"
-    ],
+    "category": "14",
     "tags": [
         "JSON",
         "Web"

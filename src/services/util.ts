@@ -12,9 +12,9 @@ export const makeTagList = (posts: Post[]): string[] => {
 
 
 export interface Post {
-  id: string;          
+  id: string;
   title: string;
-  category: string[];
+  category: string;
   tags: string[];
   createdAt: string;
   thumbnailUrl: string;
@@ -26,14 +26,14 @@ export interface Post {
  * ID를 기준으로 특정 포스트를 찾는 함수
  */
 export const findPostById = (posts: Post[], id: string | null): Post | undefined => {
-    if (!id) return undefined;
-    return posts.find((post) => post.id === id);
+  if (!id) return undefined;
+  return posts.find((post) => post.id === id);
 };
 
 export interface CategoryItem {
   id: number;
   name: string;
-  parentId: number | null; // 최상위는 null
+  parentId: number | null;
 }
 
 export interface CategoryTreeItem extends CategoryItem {
@@ -53,7 +53,21 @@ export const makeCategoryTree = (
     .filter((item) => item.parentId === parentId)
     .map((item) => ({
       ...item,
-      // 현재 item.id를 부모로 갖는 자식들을 재귀적으로 찾음
       children: makeCategoryTree(list, item.id),
     }));
+};
+
+/**
+ * ID로 TAG 이름 찾기, 없을 시 Tech 반환
+ * @param list makeCategoryTree로 만들어진 Tree Item
+ * @param id - Name을 찾을 아이디
+ */
+export const getCategoryNameById = (
+  list: CategoryItem[],
+  id: string
+): string => {
+  const categoryId = Number(id);
+  const category = list.find((item) => item.id === categoryId);
+  
+  return category ? category.name : "Tech";
 };

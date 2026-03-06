@@ -1,9 +1,7 @@
 {
     "id": "202603051324000001",
-    "title": "0001번째 블로그 글",
-    "category": [
-        "Tech"
-    ],
+    "title": "JS 구동 방식 정리",
+    "category": "16",
     "tags": [
         "JSON",
         "Web"

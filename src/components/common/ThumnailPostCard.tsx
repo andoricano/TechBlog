@@ -1,9 +1,13 @@
 import React from 'react';
 
-interface PostData {
+import { getCategoryNameById } from '../../services/util';
+import { useStore } from '../../store/useStore';
+
+
+export interface PostData {
     id: string;
     title: string;
-    category: string[];
+    category: string;
     tags: string[];
     createdAt: string;
     thumbnailUrl: string;
@@ -16,6 +20,8 @@ interface Props {
 }
 
 const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
+    const categoryMap = useStore((state) => state.categoryMap);
+    const categoryName = getCategoryNameById(categoryMap, post.category);
     return (
         <div
             onClick={() => onClick(post.id)}
@@ -33,11 +39,9 @@ const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
             </div>
 
             <div className="flex gap-2 mb-2">
-                {post.category.map((cat) => (
-                    <span key={cat} className="text-[10px] font-bold text-sky-600 uppercase tracking-wider">
-                        {cat}
-                    </span>
-                ))}
+                <span className="text-[10px] font-bold text-sky-600 uppercase tracking-wider">
+                    {categoryName}
+                </span>
             </div>
 
             <h3 className="text-lg font-bold text-slate-800 line-clamp-1 group-hover:text-sky-600 transition-colors">

@@ -20,7 +20,7 @@ const ArchivePage: React.FC = () => {
 
     // 1. 카테고리에 따른 필터링 로직 추가
     const filteredPosts = selectedCategory
-        ? posts.filter(post => post.category.includes(selectedCategory))
+        ? posts.filter(post => post.category === selectedCategory.toString())
         : posts;
 
     // 2. 필터링된 결과로 페이지네이션 계산
@@ -38,7 +38,6 @@ const ArchivePage: React.FC = () => {
     useEffect(() => {
         const store = useStore.getState();
         store.fetchPosts();
-        store.fetchCategoryMap();
     }, []);
 
     const handlePostClick = (post: Post) => {
