@@ -1,72 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStore } from '../store/useStore';
 import { CategoryTreeItem } from '../services/util';
 
-
-
 const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ node, depth }) => {
     const { setSelectedCategory, selectedCategory } = useStore();
-    const [isOpen, setIsOpen] = useState(true);
-    const hasChildren = node.children && node.children.length > 0;
 
-    // 현재 노드가 선택된 상태인지 확인
-    const isSelected = selectedCategory === node.name;
-
-    const toggleOpen = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setIsOpen(!isOpen);
-    };
+    const isSelected = selectedCategory === node.id;
 
     const handleCategoryClick = (e: React.MouseEvent) => {
         e.stopPropagation();
-        // 필터링 상태 업데이트
-        setSelectedCategory(isSelected ? null : node.name);
-        // 이름 클릭 시에도 폴더 열림/닫힘 연동
-        if (hasChildren) {
-            setIsOpen(!isOpen);
-        }
+        setSelectedCategory(isSelected ? null : node.id);
     };
 
     return (
         <div className="w-full">
+            {/* 노드 항목 */}
             <div
-                className={`group flex items-center py-1.5 px-2 cursor-pointer rounded transition-all duration-150 ease-in-out ${isSelected
-                        ? 'bg-sky-100 text-sky-700 font-bold' // 선택되었을 때 스타일
-                        : 'hover:bg-slate-100 text-slate-600 hover:text-slate-900'
+                className={`group flex items-center py-1.5 px-2 cursor-pointer rounded transition-all duration-150 ease-in-out select-none ${isSelected
+                    ? 'bg-sky-100 text-sky-700 font-bold'
+                    : 'hover:bg-slate-100 text-slate-600 hover:text-slate-900'
                     }`}
                 style={{ paddingLeft: `${depth * 16 + 8}px` }}
                 onClick={handleCategoryClick}
             >
-                {/* 화살표 영역 */}
-                <div className="w-4 h-4 flex items-center justify-center mr-1">
-                    {hasChildren && (
-                        <span
-                            className={`text-[10px] transition-transform duration-200 ${isOpen ? 'rotate-90' : ''
-                                } ${isSelected ? 'text-sky-600' : 'text-slate-400'}`}
-                            onClick={(e) => {
-                                e.stopPropagation(); // 이름 클릭과 별개로 화살표만 누를 때를 대비
-                                toggleOpen(e);
-                            }}
-                        >
-                            ▶
-                        </span>
-                    )}
-                </div>
-
-                <span className="mr-2 text-base leading-none">
-                    📂
-                </span>
-                <span className="text-sm truncate">
-                    {node.name}
-                </span>
+                <span className="mr-2 text-base leading-none">📂</span>
+                <span className="text-sm truncate">{node.name}</span>
             </div>
 
-            {/* 자식 렌더링 */}
-            {hasChildren && isOpen && (
+            {/* 자식 노드 렌더링 (항상 보여줌) */}
+            {node.children && node.children.length > 0 && (
                 <div className="w-full">
                     {node.children.map((child) => (
                         <CategoryNode
-                            key={`${child.parent}-${child.name}`}
+                            key={child.id}
                             node={child}
                             depth={depth + 1}
                         />
@@ -77,10 +43,9 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
     );
 };
 
-
-
 const CategoryTree: React.FC = () => {
-    const { categoryTree, isLoading } = useStore();
+    const { categoryTree, isLoading, selectedCategory, setSelectedCategory } = useStore();
+    const isAllSelected = selectedCategory === null;
 
     if (isLoading) {
         return (
@@ -102,18 +67,30 @@ const CategoryTree: React.FC = () => {
             </div>
 
             <div className="flex-1 px-4 pb-8 overflow-y-auto custom-scrollbar">
+
+                <div
+                    className={`cursor-pointer px-2 py-2 mb-2 rounded transition-all select-none ${isAllSelected ? 'bg-sky-500 text-white font-bold' : 'hover:bg-slate-100 text-slate-600'
+                        }`}
+                    onClick={() => setSelectedCategory(null)}
+                >
+                    🏠 전체 게시글
+                </div>
+
                 {categoryTree.length > 0 ? (
                     categoryTree.map((rootNode) => (
-                        <CategoryNode
-                            key={`${rootNode.parent}-${rootNode.name}`}
-                            node={rootNode}
-                            depth={0}
-                        />
+                        <React.Fragment key={rootNode.id}>
+                            {/* 필요하다면 최상위 노드 이름(rootNode.name)을 여기서 출력 가능 */}
+                            {rootNode.children.map((child) => (
+                                <CategoryNode
+                                    key={child.id}
+                                    node={child}
+                                    depth={0}
+                                />
+                            ))}
+                        </React.Fragment>
                     ))
                 ) : (
-                    <div className="px-2 text-sm text-slate-400 italic">
-                        No categories found.
-                    </div>
+                    <div className="px-2 text-sm text-slate-400 italic">No categories found.</div>
                 )}
             </div>
         </aside>

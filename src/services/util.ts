@@ -31,9 +31,11 @@ export const findPostById = (posts: Post[], id: string | null): Post | undefined
 };
 
 export interface CategoryItem {
+  id: number;
   name: string;
-  parent: string;
+  parentId: number | null; // 최상위는 null
 }
+
 export interface CategoryTreeItem extends CategoryItem {
   children: CategoryTreeItem[];
 }
@@ -41,16 +43,17 @@ export interface CategoryTreeItem extends CategoryItem {
 /**
  * 평면 카테고리 리스트를 계층적 트리 구조로 변환
  * @param list - category_map.json에서 온 배열
- * @param parentName - 시작할 부모 이름 (기본값 "Tech")
+ * @param parentId - 시작할 부모 ID (최상위 노드를 찾으려면 null 전달)
  */
 export const makeCategoryTree = (
-  list: CategoryItem[], 
-  parentName: string = "master" 
+  list: CategoryItem[],
+  parentId: number | null = null
 ): CategoryTreeItem[] => {
   return list
-    .filter((item) => item.parent === parentName)
+    .filter((item) => item.parentId === parentId)
     .map((item) => ({
       ...item,
-      children: makeCategoryTree(list, item.name),
+      // 현재 item.id를 부모로 갖는 자식들을 재귀적으로 찾음
+      children: makeCategoryTree(list, item.id),
     }));
 };
