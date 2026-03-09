@@ -1,12 +1,11 @@
 {
     "id": "202603051327450003",
-    "title": "0003번째 블로그 글",
-    "category": "14",
+    "title": "CS에서의 Component",
+    "category": "23",
     "tags": [
-        "JSON",
-        "Web"
+        "Computer Engineering"
     ],
     "createdAt": "202603051327",
-    "thumbnailUrl": "images/thumb1.jpg",
-    "description": "0003번째 포스트 요약입니다."
+    "thumbnailUrl": "images/Component-cables.jpg",
+    "description": "Component에 대해 알아봅시다."
 }

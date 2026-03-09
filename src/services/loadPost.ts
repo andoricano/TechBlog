@@ -1,11 +1,18 @@
 import { Post } from "./util";
-
 export const loadPostsByIds = async (path: string, folderIds: string[]): Promise<Post[]> => {
   try {
     const postData = await Promise.all(
       folderIds.map(async (id) => {
-        const res = await fetch(`${path}/${id}/data.json`);
+        const url = `${path}/${id}/data.json`;
+        const res = await fetch(url);
+        
         if (!res.ok) return null;
+
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          console.warn(`파일 형식이 JSON이 아님: ${url}`);
+          return null;
+        }
 
         const data = await res.json();
 
