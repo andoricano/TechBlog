@@ -113,5 +113,10 @@
     "id": 23,
     "name": "Computer Engineering",
     "parentId": 19
+  },
+  {
+    "id": 24,
+    "name": "Component",
+    "parentId": 23
   }
 ]
