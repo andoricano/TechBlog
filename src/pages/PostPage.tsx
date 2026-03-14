@@ -81,6 +81,15 @@ const PostPage: React.FC = () => {
                 const currentToc: TocItem[] = [];
                 const renderer = new marked.Renderer();
 
+                renderer.image = ({ href, title, text }) => {
+                    const isFullUrl = href.startsWith('http') || href.startsWith('/');
+
+                    const finalHref = isFullUrl
+                        ? href
+                        : `/post/data/${postId}/${href}`;
+
+                    return `<img src="${finalHref}" alt="${text}" title="${title || ''}" style="max-width: 100%; height: auto; display: block; margin: 2rem auto; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);" />`;
+                };
                 // 제목 파싱 및 TOC 추출
                 renderer.heading = ({ text, depth }) => {
                     const anchorId = text.toLowerCase().replace(/[^\wㄱ-ㅎㅏ-ㅣ가-힣]+/g, '-');
