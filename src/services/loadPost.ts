@@ -1,11 +1,13 @@
 import { Post } from "./util";
+
+
 export const loadPostsByIds = async (path: string, folderIds: string[]): Promise<Post[]> => {
   try {
     const postData = await Promise.all(
       folderIds.map(async (id) => {
         const url = `${path}/${id}/data.json`;
         const res = await fetch(url);
-        
+
         if (!res.ok) return null;
 
         const contentType = res.headers.get("content-type");
@@ -16,12 +18,20 @@ export const loadPostsByIds = async (path: string, folderIds: string[]): Promise
 
         const data = await res.json();
 
+        let finalThumbnailUrl = "";
+
+        if (!data.thumbnailUrl || data.thumbnailUrl.trim() === "") {
+          finalThumbnailUrl = "/post/black_mokoko.png";
+        } else if (data.thumbnailUrl.startsWith('http') || data.thumbnailUrl.startsWith('/')) {
+          finalThumbnailUrl = data.thumbnailUrl;
+        } else {
+          finalThumbnailUrl = `${path}/${id}/${data.thumbnailUrl}`;
+        }
+
         return {
           ...data,
           folderId: id,
-          thumbnailUrl: data.thumbnailUrl?.startsWith('http')
-            ? data.thumbnailUrl
-            : `${path}/${id}/${data.thumbnailUrl}`
+          thumbnailUrl: finalThumbnailUrl
         };
       })
     );
