@@ -172,7 +172,7 @@ const Career: React.FC = () => {
                     {/* Company */}
                     <div className="flex flex-col">
                         <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Company</span>
-                        <span className="font-bold text-gray-800 text-lg">Huinsystec</span>
+                        <span className="font-bold text-gray-800 text-lg">huin</span>
                     </div>
 
                     {/* Divider 1 */}
