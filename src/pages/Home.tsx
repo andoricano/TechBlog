@@ -98,7 +98,7 @@ const ProfileCard: React.FC = () => {
                     <p className="text-lg font-bold text-sky-700 mb-6">Profile Info</p>
                     <div className="flex flex-col items-center text-center">
                         <img
-                            src="/rsc/profile.jpg"
+                            src="/rsc/profile.jpeg"
                             alt="profile image"
                             className="w-32 h-32 rounded-2xl object-cover border border-sky-200 mb-6 shadow-sm"
                         />
