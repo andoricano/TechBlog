@@ -3,15 +3,6 @@ Tech
         Web
         Android
         Unity
-        Language
-            js,ts
-            c,c++
-            Java
-            Python
-            C#
-            kotlin
-
-        Algorithm
 
     Project
         Web
@@ -26,3 +17,13 @@ Tech
         React
         Computer Science
             Component
+
+            Language
+                js,ts
+                c,c++
+                Java
+                Python
+                C#
+                kotlin
+
+            Algorithm

@@ -26,102 +26,102 @@
   },
   {
     "id": 6,
-    "name": "Language",
-    "parentId": 2
-  },
-  {
-    "id": 7,
-    "name": "js,ts",
-    "parentId": 6
-  },
-  {
-    "id": 8,
-    "name": "c,c++",
-    "parentId": 6
-  },
-  {
-    "id": 9,
-    "name": "Java",
-    "parentId": 6
-  },
-  {
-    "id": 10,
-    "name": "Python",
-    "parentId": 6
-  },
-  {
-    "id": 11,
-    "name": "C#",
-    "parentId": 6
-  },
-  {
-    "id": 12,
-    "name": "kotlin",
-    "parentId": 6
-  },
-  {
-    "id": 13,
-    "name": "Algorithm",
-    "parentId": 2
-  },
-  {
-    "id": 14,
     "name": "Project",
     "parentId": 1
   },
   {
-    "id": 15,
+    "id": 7,
     "name": "Web",
-    "parentId": 14
+    "parentId": 6
   },
   {
-    "id": 16,
+    "id": 8,
     "name": "Tech Blog",
-    "parentId": 15
+    "parentId": 7
   },
   {
-    "id": 17,
+    "id": 9,
     "name": "Markdown Pipeline",
-    "parentId": 15
+    "parentId": 7
   },
   {
-    "id": 18,
+    "id": 10,
     "name": "Android",
-    "parentId": 14
+    "parentId": 6
   },
   {
-    "id": 19,
+    "id": 11,
     "name": "Unity",
-    "parentId": 14
+    "parentId": 6
   },
   {
-    "id": 20,
+    "id": 12,
     "name": "Study",
     "parentId": 1
   },
   {
-    "id": 21,
+    "id": 13,
     "name": "Baekjoon",
-    "parentId": 20
+    "parentId": 12
+  },
+  {
+    "id": 14,
+    "name": "Programmers",
+    "parentId": 12
+  },
+  {
+    "id": 15,
+    "name": "React",
+    "parentId": 12
+  },
+  {
+    "id": 16,
+    "name": "Computer Science",
+    "parentId": 12
+  },
+  {
+    "id": 17,
+    "name": "Component",
+    "parentId": 16
+  },
+  {
+    "id": 18,
+    "name": "Language",
+    "parentId": 16
+  },
+  {
+    "id": 19,
+    "name": "js,ts",
+    "parentId": 18
+  },
+  {
+    "id": 20,
+    "name": "c,c++",
+    "parentId": 18
+  },
+  {
+    "id": 21,
+    "name": "Java",
+    "parentId": 18
   },
   {
     "id": 22,
-    "name": "Programmers",
-    "parentId": 20
+    "name": "Python",
+    "parentId": 18
   },
   {
     "id": 23,
-    "name": "React",
-    "parentId": 20
+    "name": "C#",
+    "parentId": 18
   },
   {
     "id": 24,
-    "name": "Computer Science",
-    "parentId": 20
+    "name": "kotlin",
+    "parentId": 18
   },
   {
     "id": 25,
-    "name": "Component",
-    "parentId": 24
+    "name": "Algorithm",
+    "parentId": 16
   }
 ]

@@ -11,6 +11,8 @@ import { useStore } from '../store/useStore';
 //진행중인 프로젝트 3개까지 띄우기 가능
 const HomeProjectList = [
     "202603051327430002",
+    "202603161152220001",
+    "202603171634280002",
 ]
 
 const Home: React.FC = () => {
