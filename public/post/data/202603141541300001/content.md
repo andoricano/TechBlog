@@ -11,17 +11,17 @@
 그래서 DP로 풀기로 했고 다음과 같은 접근 방식으로 점화식을 구할 수 있었습니다.
 
 ### 1
-![Image1](images/image1.png)
+![image](images/image1.png)
 이 두개의 영역에선 당연히 2개 중 큰 거 하나만 고르면 됩니다.  
 memo[1] = 50
 
 ### 2
-![Image1](images/image2.png)
+![image](images/image2.png)
 이 네개의 영역에선 대각선으로 가장 큰 쌍 하나만 고르면 됩니다. 50+50이 30+10보단 크니까 100이겠네요.
 memo[2] = 100 
 
 ### 3
-![Image1](images/image3.png)
+![image](images/image3.png)
 6개의 영역이 되는 순간 앞선 1과 2에 대한 규칙성과 확연히 달라집니다. 사진 상에서 보이는 듯이 당연히 100이 포함된 지그재그 방식으로 영역을 고르면 되겠으나, 100이 아니라 0이라면 첫 번째 50과 마지막 70을 고른 것이 최적해가 됩니다.  
 DP 문제에선 여기가 관건이죠. 문제 설명과 지금까지 나타낸 토대로 점화식을 유도해야 합니다. 3열 기준으로 만들어질 수 있는  케이스를 구하기 위해서 4가지 길이 있습니다.
 - 1. 3열의 위 고르고, 2열의 아래 고르기
@@ -37,10 +37,4 @@ m[0][n] = max(m[1][n-1], m[1][n-2])
 
 
 ## cpp 풀이
-@[code](code1.cpp)
-<a href="https://github.com/andoricano/Alg-problem/tree/main/C%2B%2B17/%EB%B0%B1%EC%A4%80/Silver/9465.%E2%80%85%EC%8A%A4%ED%8B%B0%EC%BB%A4"
- target="_blank" rel="noopener noreferrer">cpp code git</a>
-
-## py
-@[code](code2.py)
-<a href="https://github.com/andoricano/Alg-problem/tree/main/PyPy3/%EB%B0%B1%EC%A4%80/Silver/9465.%E2%80%85%EC%8A%A4%ED%8B%B0%EC%BB%A4" target="_blank" rel="noopener noreferrer">py code git</a>
+@[code]("https://gist.githubusercontent.com/andoricano/bf94c83005c0536168c1ee33d739c242/raw/6e3ce6e49f2ac1afafc1bf632c182df0e484a3db/c9465.cpp")

@@ -32,8 +32,12 @@ const Home: React.FC = () => {
     }, [fetchPosts]);
 
     const handlePostClick = (post: Post) => {
-        navigate(`/post?id=${post.id}`, { state: { post } });
+        navigate(`/posting?id=${post.id}`, { state: { post } });
     };
+
+    // const handlePostClick = (post: Post) => {
+    //     navigate(`/post?id=${post.id}`, { state: { post } });
+    // };
 
     return (
         <div className="flex flex-col gap-8 w-full">

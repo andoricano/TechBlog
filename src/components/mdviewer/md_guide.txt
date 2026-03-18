@@ -1,3 +1,8 @@
+# Custom Function
+@[image]("path")
+@[code]("gist")
+
+#과 ##만 인덱스 테이블로 만듦
 
 ## 새로운 탭으로 링크 접속
 링크 : <a href="https://www.acmicpc.net/problem/9465" target="_blank" rel="noopener noreferrer">https://www.acmicpc.net/problem/9465</a>

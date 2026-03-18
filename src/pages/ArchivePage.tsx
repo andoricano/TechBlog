@@ -41,7 +41,7 @@ const ArchivePage: React.FC = () => {
     }, []);
 
     const handlePostClick = (post: Post) => {
-        navigate(`/post?id=${post.id}`, { state: { post } });
+        navigate(`/posting?id=${post.id}`, { state: { post } });
     };
 
     const handlePageChange = (pageNum: number) => {

@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import ArchivePage from './pages/ArchivePage';
 import PostPage from './pages/PostPage';
+import PostingPage from './pages/PostingPage';
 
 
 const AppContent = () => {
@@ -24,6 +25,7 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/post" element={<PostPage />} />
+          <Route path="/posting" element={<PostingPage/>}/>
         </Routes>
       </main>
     </div>
