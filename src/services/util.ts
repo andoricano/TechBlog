@@ -80,3 +80,35 @@ export const getCategoryNameById = (
   
   return category ? category.name : "Tech";
 };
+
+/**
+ * @description yyyymmddhhmm 형식의 문자열을 읽기 쉬운 한글 날짜 형식으로 변환합니다.
+ * @param {string} dateStr - 12자리 날짜 문자열 (예: 202603201129)
+ * @returns {string} 변환된 날짜 문자열 또는 원본
+ */
+export const formatDate = (dateStr: string) => {
+  if (dateStr.length < 12) return dateStr;
+
+  const year = dateStr.substring(0, 4);
+  const month = dateStr.substring(4, 6);
+  const day = dateStr.substring(6, 8);
+  const hour = dateStr.substring(8, 10);
+  const minute = dateStr.substring(10, 12);
+
+  return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+};
+
+/**
+ * @description yymmddhhmm 형식의 문자열을 읽기 쉬운 한글 날짜 형식으로 짧게 변환합니다.
+ * @param {string} dateStr - 12자리 날짜 문자열 (예: 202603201129)
+ * @returns {string} 변환된 날짜 문자열 또는 원본
+ */
+export const formatDaily = (dateStr: string) => {
+  if (dateStr.length < 12) return dateStr;
+
+  const year = dateStr.substring(2, 4);
+  const month = dateStr.substring(4, 6);
+  const day = dateStr.substring(6, 8);
+
+  return `${year}년 ${month}월 ${day}일`;
+};

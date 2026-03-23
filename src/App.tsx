@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from
 import Header from './components/Header';
 import Home from './pages/Home';
 import ArchivePage from './pages/ArchivePage';
-import PostPage from './pages/PostPage';
 import PostingPage from './pages/PostingPage';
 import { useStore } from './store/useStore';
 import { useEffect } from 'react';
@@ -32,7 +31,6 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/archive" element={<ArchivePage />} />
-          <Route path="/post" element={<PostPage />} />
           <Route path="/posting" element={<PostingPage />} />
         </Routes>
       </main>
