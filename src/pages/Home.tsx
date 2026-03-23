@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LinkBox from '../components/common/LinkBox';
 import ThumbnailPostCard from '../components/common/ThumnailPostCard';
@@ -22,22 +22,11 @@ const Home: React.FC = () => {
 
     // 1. 스토어에서 데이터 및 로직 구독
     const posts = useStore((state) => state.posts);
-    const fetchPosts = useStore((state) => state.fetchPosts);
-    const fetchCategoryMap = useStore((state) => state.fetchCategoryMap);
 
-    // 2. 컴포넌트 마운트 시 데이터 fetch
-    useEffect(() => {
-        fetchPosts();
-        fetchCategoryMap();
-    }, [fetchPosts]);
 
     const handlePostClick = (post: Post) => {
         navigate(`/posting?id=${post.id}`, { state: { post } });
     };
-
-    // const handlePostClick = (post: Post) => {
-    //     navigate(`/post?id=${post.id}`, { state: { post } });
-    // };
 
     return (
         <div className="flex flex-col gap-8 w-full">
