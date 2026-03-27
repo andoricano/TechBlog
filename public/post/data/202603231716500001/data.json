@@ -1,11 +1,12 @@
 {
     "id": "202603231716500001",
-    "title": "JS Prototype Constructor",
-    "category": "19",
+    "title": "Dijkstra 보완 알고리즘",
+    "category": "25",
     "tags": [
-        "JavaScript"
+        "Algorithm",
+        "Dijkstra"
     ],
     "createdAt": "202603231716",
-    "thumbnailUrl": "images/thumb1.png",
-    "description": "JS의 Prototype을 만들어봅시다."
+    "thumbnailUrl": "",
+    "description": "Dijkstra의 한계를 알아보고 이에 대한 해결책을 알아봅시다."
 }

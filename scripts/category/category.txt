@@ -19,11 +19,18 @@ Tech
             Component
 
             Language
-                js,ts
-                c,c++
-                Java
-                Python
-                C#
-                kotlin
+                Native compiler
+                    c,c++
+                    swift
+                    Go
+                    Rust
+                VM
+                    Java
+                    kotlin
+                    C#
+                Interpreter
+                    js,ts
+                    Python
+                
 
             Algorithm

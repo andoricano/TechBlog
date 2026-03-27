@@ -91,36 +91,66 @@
   },
   {
     "id": 19,
-    "name": "js,ts",
+    "name": "Native compiler",
     "parentId": 18
   },
   {
     "id": 20,
     "name": "c,c++",
-    "parentId": 18
+    "parentId": 19
   },
   {
     "id": 21,
-    "name": "Java",
-    "parentId": 18
+    "name": "swift",
+    "parentId": 19
   },
   {
     "id": 22,
-    "name": "Python",
-    "parentId": 18
+    "name": "Go",
+    "parentId": 19
   },
   {
     "id": 23,
-    "name": "C#",
-    "parentId": 18
+    "name": "Rust",
+    "parentId": 19
   },
   {
     "id": 24,
-    "name": "kotlin",
+    "name": "VM",
     "parentId": 18
   },
   {
     "id": 25,
+    "name": "Java",
+    "parentId": 24
+  },
+  {
+    "id": 26,
+    "name": "kotlin",
+    "parentId": 24
+  },
+  {
+    "id": 27,
+    "name": "C#",
+    "parentId": 24
+  },
+  {
+    "id": 28,
+    "name": "Interpreter",
+    "parentId": 18
+  },
+  {
+    "id": 29,
+    "name": "js,ts",
+    "parentId": 28
+  },
+  {
+    "id": 30,
+    "name": "Python",
+    "parentId": 28
+  },
+  {
+    "id": 31,
     "name": "Algorithm",
     "parentId": 16
   }
