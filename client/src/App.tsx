@@ -14,6 +14,22 @@ const AppContent = () => {
   const fetchCategoryMap = useStore((state) => state.fetchCategoryMap);
 
   useEffect(() => {
+    const seedData = async () => {
+      try {
+        const response = await fetch('http://localhost:7888/api/posts/dict');
+        const result = await response.json();
+        console.log('✅ DB에서 가져온 딕셔너리:', result);
+
+      } catch (error) {
+        console.error('❌ Seed 에러:', error);
+      }
+    };
+
+    seedData();
+  }, []);
+
+
+  useEffect(() => {
     fetchPosts();
     fetchCategoryMap();
   }, [fetchPosts, fetchCategoryMap]);
