@@ -1,12 +1,12 @@
-import Toolbar from "../component/main/editor/Toolbar";
+import { useState } from "react";
+import Editor from "../component/main/editor/Editor";
 
 
 export default function PostingPage() {
-    const projectName = "Post Editor";
 
     return (
         <div>
-
+            <Editor />
         </div>
     );
 }
