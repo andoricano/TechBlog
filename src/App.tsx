@@ -5,49 +5,20 @@ import ArchivePage from './pages/ArchivePage';
 import PostingPage from './pages/PostingPage';
 import { useStore } from './store/useStore';
 import { useEffect } from 'react';
+import { fetchPostMetaDict } from './api/postApi';
 
 const AppContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchPosts = useStore((state) => state.fetchPosts);
-  const fetchCategoryMap = useStore((state) => state.fetchCategoryMap);
-
-
-
   useEffect(() => {
-    // 1. 전체 포스트 데이터 가져오기 (1:1 매칭)
-    const loadAllPosts = async () => {
-      try {
-        const res = await fetch('/.netlify/functions/posts');
-        const data = await res.json();
-        console.log("📂 [전체 포스트 로드]:", data);
-      } catch (err) {
-        console.error("❌ 전체 포스트 로드 실패:", err);
-      }
+    const loadData = async () => {
+      const data = await fetchPostMetaDict();
+      console.log(data);
     };
 
-    // 2. Dict 형태 데이터 가져오기 (사용자님이 원하신 핵심 데이터)
-    const loadCategoryDict = async () => {
-      try {
-        const res = await fetch('/.netlify/functions/posts?type=dict');
-        const data = await res.json();
-        console.log("📋 [Category Dict 로드]:", data);
-      } catch (err) {
-        console.error("❌ Dict 데이터 로드 실패:", err);
-      }
-    };
-
-    // 컴포넌트 마운트 시 실행
-    loadAllPosts();
-    loadCategoryDict();
+    loadData(); // 정의한 비동기 함수를 실행
   }, []);
-
-
-  useEffect(() => {
-    fetchPosts();
-    fetchCategoryMap();
-  }, [fetchPosts, fetchCategoryMap]);
 
   const handleLogoClick = () => {
     if (location.pathname !== '/') {

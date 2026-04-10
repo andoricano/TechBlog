@@ -12,10 +12,12 @@
     "packageJson": {
       "dependencies": [
         "npm:@eslint/js@^9.39.1",
+        "npm:@netlify/functions@^5.1.5",
         "npm:@tailwindcss/postcss@^4.2.1",
         "npm:@tailwindcss/typography@~0.5.19",
         "npm:@tailwindcss/vite@^4.2.1",
         "npm:@types/marked@^5.0.2",
+        "npm:@types/node@^25.5.2",
         "npm:@types/react-dom@^19.2.3",
         "npm:@types/react@^19.2.14",
         "npm:@vitejs/plugin-react@^5.1.1",
@@ -25,6 +27,7 @@
         "npm:globals@^16.5.0",
         "npm:highlight.js@^11.11.1",
         "npm:marked@^17.0.4",
+        "npm:mongodb@^7.1.1",
         "npm:postcss@^8.5.8",
         "npm:react-dom@^19.2.0",
         "npm:react-markdown@^10.1.0",
