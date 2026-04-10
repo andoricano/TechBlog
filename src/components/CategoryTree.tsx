@@ -1,17 +1,28 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { CategoryTreeItem } from '../services/util';
+import { ICategory } from '../types/category';
 
-const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ node, depth }) => {
-    const { setSelectedCategory, selectedCategory } = useStore();
 
-    const isSelected = selectedCategory === node.id;
+interface CategoryNodeProps {
+    node: ICategory;
+    depth: number;
+    selectedCategory: ICategory | null;
+    onCategoryClick: (category: ICategory | null) => void;
+}
+
+
+const CategoryNode: React.FC<CategoryNodeProps> = ({
+    node,
+    depth,
+    selectedCategory,
+    onCategoryClick
+}) => {
+    const isSelected = selectedCategory?.path === node.path;
 
     const handleCategoryClick = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setSelectedCategory(isSelected ? null : node.id);
+        onCategoryClick(isSelected ? null : node);
     };
-
     return (
         <div className="w-full">
             {/* 노드 항목 */}
@@ -23,18 +34,21 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
                 style={{ paddingLeft: `${depth * 16 + 8}px` }}
                 onClick={handleCategoryClick}
             >
-                <span className="mr-2 text-base leading-none">📂</span>
-                <span className="text-sm truncate">{node.name}</span>
+                <span className="mr-2 text-base leading-none">
+                    {node.children && node.children.length > 0 ? '📂' : '📄'}
+                </span>
+                <span className="text-sm truncate">{node.slug}</span>
             </div>
 
-            {/* 자식 노드 렌더링 (항상 보여줌) */}
             {node.children && node.children.length > 0 && (
                 <div className="w-full">
                     {node.children.map((child) => (
                         <CategoryNode
-                            key={child.id}
+                            key={child.path}
                             node={child}
                             depth={depth + 1}
+                            selectedCategory={selectedCategory}
+                            onCategoryClick={onCategoryClick}
                         />
                     ))}
                 </div>
@@ -43,20 +57,14 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
     );
 };
 
-const CategoryTree: React.FC = () => {
-    const { categoryTree, isLoading, selectedCategory, setSelectedCategory } = useStore();
-    const isAllSelected = selectedCategory === null;
+interface CategoryTreeProps {
+    selectedCategory: ICategory | null;
+    onCategoryClick: (category: ICategory | null) => void;
+}
+const CategoryTree: React.FC<CategoryTreeProps> = ({ selectedCategory, onCategoryClick }) => {
+    const categoryTree = useStore((state) => state.categoryTree);
 
-    if (isLoading) {
-        return (
-            <aside className="w-64 min-h-[700px] rounded-xl bg-white/80 border border-sky-300 shadow-sm p-6">
-                <div className="animate-pulse space-y-4">
-                    <div className="h-4 bg-sky-100 rounded w-3/4"></div>
-                    <div className="h-4 bg-sky-100 rounded w-1/2"></div>
-                </div>
-            </aside>
-        );
-    }
+    const isAllSelected = selectedCategory === null;
 
     return (
         <aside className="w-64 min-h-[700px] rounded-xl bg-white/80 border border-sky-300 shadow-sm flex flex-col overflow-hidden">
@@ -67,24 +75,27 @@ const CategoryTree: React.FC = () => {
             </div>
 
             <div className="flex-1 px-4 pb-8 overflow-y-auto custom-scrollbar">
-
+                {/* 전체 게시글 버튼 */}
                 <div
-                    className={`cursor-pointer px-2 py-2 mb-2 rounded transition-all select-none ${isAllSelected ? 'bg-sky-500 text-white font-bold' : 'hover:bg-slate-100 text-slate-600'
+                    className={`cursor-pointer px-2 py-2 mb-2 rounded transition-all select-none ${isAllSelected
+                        ? 'bg-sky-500 text-white font-bold shadow-md shadow-sky-100'
+                        : 'hover:bg-slate-100 text-slate-600'
                         }`}
-                    onClick={() => setSelectedCategory(null)}
+                    onClick={() => onCategoryClick(null)}
                 >
                     🏠 전체 게시글
                 </div>
 
                 {categoryTree.length > 0 ? (
                     categoryTree.map((rootNode) => (
-                        <React.Fragment key={rootNode.id}>
-                            {/* 필요하다면 최상위 노드 이름(rootNode.name)을 여기서 출력 가능 */}
+                        <React.Fragment key={rootNode.path}>
                             {rootNode.children.map((child) => (
                                 <CategoryNode
-                                    key={child.id}
+                                    key={child.path}
                                     node={child}
                                     depth={0}
+                                    selectedCategory={selectedCategory}
+                                    onCategoryClick={onCategoryClick}
                                 />
                             ))}
                         </React.Fragment>

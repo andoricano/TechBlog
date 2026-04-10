@@ -1,62 +1,83 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { Post } from '../services/util';
 import ArchiveBox from '../components/common/ArchiveBox';
 import CategoryTree from '../components/CategoryTree';
+import { IPost } from '../types/post';
+import { ICategory } from '../types/category';
 
 
 const ArchivePage: React.FC = () => {
+
     const col = 3;
     const row = 2;
-
-    const { posts, isLoading, selectedCategory } = useStore();
+    const postsPerPage = col * row;
 
     const navigate = useNavigate();
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = col * row;
     const paginationRef = useRef<HTMLDivElement>(null);
 
-    // 1. 카테고리에 따른 필터링 로직 추가
-    const filteredPosts = selectedCategory
-        ? posts.filter(post => post.category === selectedCategory.toString())
-        : posts;
+    const postsDict = useStore((state) => state.postsDict);
 
-    // 2. 필터링된 결과로 페이지네이션 계산
-    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
 
-    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-    // 카테고리가 바뀌면 1페이지로 리셋하는 로직 (선택 사항)
+    const postList = useMemo(() => {
+        const list = Object.values(postsDict).sort(
+            (a, b) => new Date(b.meta.createdAt).getTime() - new Date(a.meta.createdAt).getTime()
+        );
+
+        if (list.length > 0) {
+            const stats = list.reduce((acc: Record<string, number>, post) => {
+                const path = post.meta.category.path;
+                acc[path] = (acc[path] || 0) + 1;
+                return acc;
+            }, {});
+
+            console.group("📂 Archive 데이터 로드 완료");
+            console.log("📌 고유 카테고리 개수:", Object.keys(stats).length);
+            console.groupEnd();
+        }
+
+        return list;
+    }, [postsDict]);
+
+
+
+    const filteredPostList = useMemo(() => {
+        const result = !selectedCategory
+            ? postList
+            : postList.filter((post) => post.meta.category.path.startsWith(selectedCategory.path));
+
+        if (selectedCategory) {
+            console.log(`🔍 필터링 적용: [${selectedCategory.path}] -> ${result.length}개 발견`);
+        }
+
+        return result;
+    }, [postList, selectedCategory]);
+
+    const totalPages = Math.ceil(filteredPostList.length / postsPerPage);
+    const currentPosts = useMemo(() => {
+        const indexOfLastPost = currentPage * postsPerPage;
+        const indexOfFirstPost = indexOfLastPost - postsPerPage;
+        return filteredPostList.slice(indexOfFirstPost, indexOfLastPost);
+    }, [filteredPostList, currentPage, postsPerPage]);
+
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedCategory]);
 
-    useEffect(() => {
-        const store = useStore.getState();
-        store.fetchPosts();
-    }, []);
-
-    const handlePostClick = (post: Post) => {
-        navigate(`/posting?id=${post.id}`, { state: { post } });
+    const handlePostClick = (post: IPost) => {
+        navigate(`/posting?id=${post.id}`);
     };
 
     const handlePageChange = (pageNum: number) => {
         setCurrentPage(pageNum);
-        setTimeout(() => {
-            if (paginationRef.current) {
-                paginationRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'end'
-                });
-            }
-        }, 50);
     };
 
-    if (isLoading) return <div className="text-center py-20 text-sky-600 font-bold">로딩 중...</div>;
+    if (Object.keys(postsDict).length === 0) {
+        return <div className="text-center py-20 text-slate-400">포스트를 불러오는 중입니다...</div>;
+    }
 
     return (
         <div className="flex flex-col w-full min-h-screen bg-slate-50">
@@ -69,7 +90,10 @@ const ArchivePage: React.FC = () => {
             <main className="max-w-7xl mx-auto p-5 w-full flex flex-row gap-6 items-start">
 
                 <div className="w-64 shrink-0">
-                    <CategoryTree />
+                    <CategoryTree
+                        selectedCategory={selectedCategory}
+                        onCategoryClick={setSelectedCategory}
+                    />
                 </div>
 
                 <section className="flex-1 min-w-0 rounded-xl px-8 pt-8 pb-10 bg-white/80 border border-sky-300 shadow-sm min-h-[700px] flex flex-col">
@@ -81,7 +105,7 @@ const ArchivePage: React.FC = () => {
                         <ArchiveBox
                             col={col}
                             row={row}
-                            posts={currentPosts}
+                            postList={currentPosts}
                             onPostClick={handlePostClick}
                         />
                     </div>
