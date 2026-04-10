@@ -6,13 +6,13 @@ import ArchiveBox from '../components/common/ArchiveBox';
 import ContactBox from '../components/common/ContactBox';
 import { findPostsByIdList, Post } from '../services/util';
 import { useStore } from '../store/useStore';
+import { IPost } from '../types/post';
 
 
 //진행중인 프로젝트 3개까지 띄우기 가능
 const HomeProjectList = [
-    "202603051327430002",
-    "202603161152220001",
-    "202603171634280002",
+    "20260409170535958",
+    "20260409172233518",
 ]
 
 const Home: React.FC = () => {
@@ -21,12 +21,17 @@ const Home: React.FC = () => {
     const navigate = useNavigate();
 
     // 1. 스토어에서 데이터 및 로직 구독
-    const posts = useStore((state) => state.posts);
+    const postsDict = useStore((state) => state.postsDict);
+    const categoryTree = useStore((state) => state.categoryTree);
 
+    const postList = Object.values(postsDict).sort(
+        (a, b) => new Date(b.meta.createdAt).getTime() - new Date(a.meta.createdAt).getTime()
+    );
 
-    const handlePostClick = (post: Post) => {
-        navigate(`/posting?id=${post.id}`, { state: { post } });
+    const handlePostClick = (post: IPost) => {
+        navigate(`/posting?id=${post.id}`);
     };
+
 
     return (
         <div className="flex flex-col gap-8 w-full">
@@ -38,7 +43,7 @@ const Home: React.FC = () => {
 
                 <div className="flex-[4] w-full">
                     {/* 최신 데이터 3개만 잘라서 Progress에 전달 */}
-                    <Progress posts={findPostsByIdList(posts, HomeProjectList)} onPostClick={handlePostClick} />
+                    <Progress posts={findPostsByIdList(postsDict, HomeProjectList)} onPostClick={handlePostClick} />
                 </div>
             </section>
 
@@ -52,7 +57,7 @@ const Home: React.FC = () => {
                 <ArchiveBox
                     col={3}
                     row={2}
-                    posts={posts}
+                    postList={postList}
                     onPostClick={handlePostClick}
                 />
 
@@ -132,8 +137,8 @@ const ProfileCard: React.FC = () => {
 
 
 interface ProgressProps {
-    posts: Post[];
-    onPostClick: (post: Post) => void;
+    posts: IPost[];
+    onPostClick: (post: IPost) => void;
 }
 
 const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
@@ -141,15 +146,22 @@ const Progress: React.FC<ProgressProps> = ({ posts, onPostClick }) => {
         <article className="flex-[4] w-full border border-sky-300 rounded-xl bg-white/80 p-8 shadow-sm h-full">
             <h3 className="text-lg font-bold text-sky-700 mb-6">진행중인 프로젝트</h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                {posts.map((post) => (
-                    <ThumbnailPostCard
-                        key={post.id}
-                        post={post}
-                        onClick={() => onPostClick(post)}
-                    />
-                ))}
-            </div>
+            {/* 데이터가 없을 경우를 위한 예외 처리 추가 */}
+            {posts.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    {posts.map((post) => (
+                        <ThumbnailPostCard
+                            key={post.id}
+                            post={post}
+                            onClick={() => onPostClick(post)}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="flex items-center justify-center h-40 text-gray-400 italic">
+                    진행 중인 프로젝트가 없습니다.
+                </div>
+            )}
         </article>
     );
 };

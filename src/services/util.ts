@@ -1,11 +1,13 @@
+import { IPost } from "../types/post";
+
 /**
  * 모든 포스트에서 태그를 추출하여 중복 없는 리스트를 반환
  */
 export const makeTagList = (posts: Post[]): string[] => {
   if (!posts || posts.length === 0) return [];
-  
+
   const allTags = posts.flatMap((post) => post.tags || []);
-  
+
   return Array.from(new Set(allTags)).sort();
 };
 
@@ -31,13 +33,21 @@ export const findPostById = (posts: Post[], id: string | null): Post | undefined
 };
 
 /**
- * ID 리스트를 기준으로 해당하는 포스트들을 찾는 함수
+ * ID 리스트를 기준으로 해당하는 포스트들을 찾는 함수 (Dict 활용 버전)
  */
-export const findPostsByIdList = (posts: Post[], idList: string[]): Post[] => {
-  if (!idList || idList.length === 0) return [];
-  
-  return posts.filter((post) => idList.includes(post.id));
+export const findPostsByIdList = (
+  postsDict: Record<string, IPost>,
+  idList: string[]
+): IPost[] => {
+  if (!idList || idList.length === 0 || !postsDict) return [];
+
+  // map으로 ID에 해당하는 포스트를 바로 가져오고, 
+  // 혹시 데이터가 없는 경우를 대비해 필터링(boolean) 처리합니다.
+  return idList
+    .map((id) => postsDict[id])
+    .filter((post): post is IPost => !!post);
 };
+
 
 export interface CategoryItem {
   id: number;
@@ -77,7 +87,7 @@ export const getCategoryNameById = (
 ): string => {
   const categoryId = Number(id);
   const category = list.find((item) => item.id === categoryId);
-  
+
   return category ? category.name : "Tech";
 };
 

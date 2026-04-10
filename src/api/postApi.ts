@@ -6,18 +6,18 @@ import { NETLIFY_FUNCTIONS_BASE } from "../config";
  * 카테고리 목록을 만들거나 네비게이션을 구성할 때 사용합니다.
  * 서버에서 content를 제외하고 보내주므로 속도가 매우 빠릅니다.
  */
-export const fetchPostMetaDict = async (): Promise<Record<string, IPostMeta>> => {
+export const fetchPostMetaDict = async (): Promise<Record<string, IPost>> => {
     try {
         const res = await fetch(`${NETLIFY_FUNCTIONS_BASE}/posts?type=dict`);
 
         if (!res.ok) {
-            throw new Error(`메타 데이터 로드 실패: ${res.status}`);
+            throw new Error(`데이터 로드 실패: ${res.status}`);
         }
 
         return await res.json();
     } catch (error) {
         console.error("fetchPostMetaDict 에러:", error);
-        return {}; // 에러 발생 시 빈 객체 반환
+        return {};
     }
 };
 
@@ -36,6 +36,6 @@ export const fetchPostDetail = async (id: string): Promise<IPost | null> => {
         return await res.json();
     } catch (error) {
         console.error(`fetchPostDetail 에러 (ID: ${id}):`, error);
-        return null; // 에러 발생 시 null 반환
+        return null;
     }
 };

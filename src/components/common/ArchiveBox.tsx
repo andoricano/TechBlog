@@ -1,16 +1,16 @@
 import React from 'react';
 import ThumbnailPostCard from './ThumnailPostCard';
-import { Post } from '../../services/util';
+import { IPost } from '../../types/post';
 
 
-interface ArchiveProps {
+interface ArchiveBoxProps {
     col: number;
     row: number;
-    posts: Post[];
-    onPostClick: (post: Post) => void;
+    postList: IPost[];
+    onPostClick: (post: IPost) => void;
 }
 
-const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) => {
+const ArchiveBox: React.FC<ArchiveBoxProps> = ({ col, row, postList, onPostClick }) => {
     // col 값에 따른 Tailwind class 매핑
     const gridColsClass = {
         1: 'grid-cols-1',
@@ -21,7 +21,7 @@ const ArchiveBox: React.FC<ArchiveProps> = ({ col, row, posts, onPostClick }) =>
 
     // 보여줄 포스트 개수 계산
     const displayLimit = col * row;
-    const displayPosts = posts.slice(0, displayLimit);
+    const displayPosts = postList.slice(0, displayLimit);
 
     return (
         <div className={`grid ${gridColsClass} gap-6 w-full`}>

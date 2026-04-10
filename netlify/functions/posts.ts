@@ -23,17 +23,26 @@ export const handler: Handler = async (event) => {
 
         // 2. Dict 반환 (getDict) - type이 dict일 때
         if (type === 'dict') {
-            // DB에서 가져올 때부터 content를 제외(0)합니다.
-            const posts = await collection.find({}).project({ content: 0 }).toArray();
+            const posts = await collection
+                .find({})
+                .project({
+                    _id: 0,
+                    content: 0
+                })
+                .toArray();
 
             const dict = posts.reduce((acc: any, post: any) => {
-                // post.meta가 존재하는지 확인 후 할당
-                acc[post.id] = post.meta;
+                acc[post.id] = {
+                    ...post,
+                    content: "", // 타입 규격을 맞추기 위한 빈 값
+                    reservation1: post.reservation1 || [],
+                    reservation2: post.reservation2 || []
+                };
                 return acc;
             }, {});
+
             return { statusCode: 200, body: JSON.stringify(dict) };
         }
-
         // 그 외 기본값: 전체 목록 반환 시에도 content 제외
         const allPosts = await collection.find({}).project({ content: 0 }).toArray();
         return { statusCode: 200, body: JSON.stringify(allPosts) };
