@@ -10,7 +10,7 @@ interface Props {
 const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
     // 1. 필요한 메타데이터 추출
     const { title, thumbnailUrl, category, createdAt, tags } = post.meta;
-
+    const FALLBACK_IMAGE = '/post/black_mokoko.png';
     // 2. content의 앞부분을 description 대용으로 사용 (데이터 구조에 따라 조절 가능)
     const description = post.content || "No description provided.";
 
@@ -22,11 +22,14 @@ const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
             {/* 썸네일 영역 */}
             <div className="overflow-hidden rounded-xl mb-4 h-40 bg-slate-50">
                 <img
-                    src={thumbnailUrl}
+                    src={thumbnailUrl && thumbnailUrl.trim() !== "" ? thumbnailUrl : FALLBACK_IMAGE}
                     alt={title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://placehold.co/400x300?text=No+Image';
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== window.location.origin + FALLBACK_IMAGE) {
+                            target.src = FALLBACK_IMAGE;
+                        }
                     }}
                 />
             </div>
