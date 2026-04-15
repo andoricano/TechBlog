@@ -8,11 +8,9 @@ interface Props {
     onClick: (id: string) => void;
 }
 const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
-    // 1. 필요한 메타데이터 추출
     const { title, thumbnailUrl, category, createdAt, tags } = post.meta;
     const FALLBACK_IMAGE = '/post/black_mokoko.png';
-    // 2. content의 앞부분을 description 대용으로 사용 (데이터 구조에 따라 조절 가능)
-    const description = post.content || "No description provided.";
+    const description = post.meta.description || "No description provided.";
 
     return (
         <div
