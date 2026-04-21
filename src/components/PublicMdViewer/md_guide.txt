@@ -1,0 +1,20 @@
+# Custom Function 작성 가이드
+
+## 1. 이미지 삽입
+- 문법: @image[alt](path/filename.*)
+- 설명: /public/post_content/images 기준으로 md img로 수정해줍니다. 
+
+## 2. 코드 블록 불러오기
+- 문법: @code[lang_type]("path/filename.*")
+- 설명: code/ 폴더 내 파일을 가져와 코드 블록으로 변환합니다.
+
+## 3. Gist 임베드
+- 문법: @gist[lang_type]("URL")
+- 설명: Gist 링크를 입력하면 전용 컴포넌트로 렌더링됩니다.
+
+## 4. 목차(Index) 생성 규칙
+- # (H1)과 ## (H2)만 인덱스 테이블로 추출됩니다.
+
+## 5. 새로운 탭으로 링크 접속
+- HTML 태그를 사용하여 작성합니다.
+- 예시: <a href="https://www.acmicpc.net/problem/9465" target="_blank" rel="noopener noreferrer">https://www.acmicpc.net/problem/9465</a>

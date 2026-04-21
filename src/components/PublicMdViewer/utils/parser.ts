@@ -1,0 +1,6 @@
+export const MD_BLOCK_TAGS = {
+  GIST_START: "-C--GIST_START",
+  GIST_END: "-C--GIST_END",
+  CODE_START: "-C--CODE_START",
+  CODE_END: "-C--CODE_END",
+};
