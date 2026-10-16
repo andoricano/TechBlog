@@ -1,4 +1,4 @@
-import { IPost, IPostMeta } from "../types/post";
+import { IPost } from "../types/post";
 import { NETLIFY_FUNCTIONS_BASE } from "../config";
 
 /**

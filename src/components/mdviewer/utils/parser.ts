@@ -55,7 +55,7 @@ const parseCustomGist = (content: string): string => {
  */
 const parseCustomCodeBlock = (content: string): string => {
   // 정규식
-  return content.replace(/@code\[(.*?)\s+(.*?)\]\(([\s\S]*?)\n\)/g, (match, type, title, code) => {
+  return content.replace(/@code\[(.*?)\s+(.*?)\]\(([\s\S]*?)\n\)/g, (_match, type, title, code) => {
 
     return `### ${title}\n\n\`\`\`${type}\n${code}\n\`\`\``;
   });

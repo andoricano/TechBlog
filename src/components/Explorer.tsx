@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { useStore } from '../store/useStore';
-import { CategoryTreeItem } from '../services/util';
+import { ICategory } from '../types/category';
 
-const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ node, depth }) => {
+const CategoryNode: React.FC<{ node: ICategory; depth: number }> = ({ node, depth }) => {
     const [isOpen, setIsOpen] = useState(true);
     const hasChildren = node.children && node.children.length > 0;
-    const { categoryTree } = useStore();
-
-
     const toggleOpen = (e: React.MouseEvent) => {
         e.stopPropagation();
         setIsOpen(!isOpen);
@@ -32,7 +29,7 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
                     {hasChildren ? '📂' : '📄'}
                 </span>
                 <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900 truncate">
-                    {node.name}
+                    {node.slug}
                 </span>
             </div>
 
@@ -40,7 +37,7 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
                 <div className="w-full">
                     {node.children.map((child) => (
                         <CategoryNode
-                            key={`${child}-${child.name}`}
+                            key={child.path}
                             node={child}
                             depth={depth + 1}
                         />
@@ -52,18 +49,7 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
 };
 
 const Explorer: React.FC = () => {
-    const { categoryTree, isLoading } = useStore();
-
-    if (isLoading) {
-        return (
-            <aside className="w-64 min-h-[700px] rounded-xl bg-white/80 border border-sky-300 shadow-sm p-6">
-                <div className="animate-pulse space-y-4">
-                    <div className="h-4 bg-sky-100 rounded w-3/4"></div>
-                    <div className="h-4 bg-sky-100 rounded w-1/2"></div>
-                </div>
-            </aside>
-        );
-    }
+    const { categoryTree } = useStore();
 
     return (
         <aside className="w-64 min-h-[700px] rounded-xl bg-white/80 border border-sky-300 shadow-sm flex flex-col overflow-hidden">
@@ -77,7 +63,7 @@ const Explorer: React.FC = () => {
                 {categoryTree.length > 0 ? (
                     categoryTree.map((rootNode) => (
                         <CategoryNode
-                            key={`${rootNode}-${rootNode.name}`}
+                            key={rootNode.path}
                             node={rootNode}
                             depth={0}
                         />

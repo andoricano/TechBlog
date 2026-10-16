@@ -7,7 +7,6 @@ import { useStore } from './store/useStore';
 import { useEffect } from 'react';
 import { fetchPostMetaDict } from './api/postApi';
 import { transformToCategoryTree } from './services/postService';
-import { IPost } from './types/post';
 
 
 

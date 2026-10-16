@@ -4,7 +4,7 @@ import LinkBox from '../components/common/LinkBox';
 import ThumbnailPostCard from '../components/common/ThumnailPostCard';
 import ArchiveBox from '../components/common/ArchiveBox';
 import ContactBox from '../components/common/ContactBox';
-import { findPostsByIdList, Post } from '../services/util';
+import { findPostsByIdList } from '../services/util';
 import { useStore } from '../store/useStore';
 import { IPost } from '../types/post';
 
@@ -22,7 +22,6 @@ const Home: React.FC = () => {
 
     // 1. 스토어에서 데이터 및 로직 구독
     const postsDict = useStore((state) => state.postsDict);
-    const categoryTree = useStore((state) => state.categoryTree);
 
     const postList = Object.values(postsDict).sort(
         (a, b) => new Date(b.meta.createdAt).getTime() - new Date(a.meta.createdAt).getTime()
