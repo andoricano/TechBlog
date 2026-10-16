@@ -27,18 +27,6 @@ const ArchivePage: React.FC = () => {
             (a, b) => new Date(b.meta.createdAt).getTime() - new Date(a.meta.createdAt).getTime()
         );
 
-        if (list.length > 0) {
-            const stats = list.reduce((acc: Record<string, number>, post) => {
-                const path = post.meta.category.path;
-                acc[path] = (acc[path] || 0) + 1;
-                return acc;
-            }, {});
-
-            console.group("📂 Archive 데이터 로드 완료");
-            console.log("📌 고유 카테고리 개수:", Object.keys(stats).length);
-            console.groupEnd();
-        }
-
         return list;
     }, [postsDict]);
 
@@ -48,10 +36,6 @@ const ArchivePage: React.FC = () => {
         const result = !selectedCategory
             ? postList
             : postList.filter((post) => post.meta.category.path.startsWith(selectedCategory.path));
-
-        if (selectedCategory) {
-            console.log(`🔍 필터링 적용: [${selectedCategory.path}] -> ${result.length}개 발견`);
-        }
 
         return result;
     }, [postList, selectedCategory]);

@@ -27,7 +27,6 @@ const PublicMdViewer: React.FC<PublicMdViewerProps> = ({ content }) => {
   const [toc, setToc] = useState<TocItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("content post : ", content)
   useEffect(() => {
     const parseAndRender = async () => {
       if (!content) return;

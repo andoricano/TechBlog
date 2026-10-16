@@ -18,7 +18,6 @@ const PostingPage: React.FC = () => {
 
 
 
-  console.log("📍 postId 값:", postId);
 
   useEffect(() => {
     // ID가 있고, 메타데이터도 있는데, 아직 본문(content)만 없을 때 실행
@@ -59,7 +58,7 @@ const PostingPage: React.FC = () => {
               {currentPostMeta.meta.title}
             </h2>
             <div className="text-slate-400 font-medium">
-              {currentPostMeta.meta.createdAt}
+              {currentPostMeta.meta.createdAt?.split('T')[0]}
             </div>
           </section>
         ) : (

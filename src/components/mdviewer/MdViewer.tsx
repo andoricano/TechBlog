@@ -44,7 +44,6 @@ const MdViewer: React.FC<MdViewerProps> = ({ content }) => {
 
         renderer.code = ({ text, lang }) => {
 
-          console.log("lang:", lang)
 
           const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
           const highlighted = hljs.highlight(text, { language }).value;

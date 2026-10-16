@@ -7,7 +7,6 @@ const CategoryNode: React.FC<{ node: CategoryTreeItem; depth: number }> = ({ nod
     const hasChildren = node.children && node.children.length > 0;
     const { categoryTree } = useStore();
 
-    console.log("현재 트리 데이터:", categoryTree);
 
     const toggleOpen = (e: React.MouseEvent) => {
         e.stopPropagation();
