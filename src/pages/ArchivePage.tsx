@@ -65,13 +65,13 @@ const ArchivePage: React.FC = () => {
 
     return (
         <div className="flex flex-col w-full min-h-screen bg-slate-50">
-            <div className="max-w-7xl mx-auto w-full px-5 mt-10">
+            <div className="max-w-7xl mx-auto w-full px-0 sm:px-5 mt-4 sm:mt-10">
                 <h1 className="text-4xl font-black text-sky-800 mb-8 border-b-4 border-sky-100 pb-4 tracking-tight">
                     Archive
                 </h1>
             </div>
 
-            <main className="max-w-7xl mx-auto p-5 w-full flex flex-col lg:flex-row gap-6 items-stretch lg:items-start">
+            <main className="max-w-7xl mx-auto p-0 sm:p-5 w-full flex flex-col lg:flex-row gap-6 items-stretch lg:items-start">
 
                 <div className="w-full lg:w-64 lg:shrink-0 min-w-0">
                     <CategoryTree
