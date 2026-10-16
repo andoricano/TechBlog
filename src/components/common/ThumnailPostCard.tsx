@@ -17,7 +17,7 @@ const ThumbnailPostCard: React.FC<Props> = ({ post, onClick }) => {
     return (
         <div
             onClick={() => onClick(post.id)}
-            className="border border-sky-100 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col h-full"
+            className="border border-sky-100 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col h-full min-w-0"
         >
             {/* 썸네일 영역 */}
             {/* 모든 카드 썸네일은 16:9 고정 영역, 이미지는 잘리지 않도록 contain */}

@@ -71,16 +71,16 @@ const ArchivePage: React.FC = () => {
                 </h1>
             </div>
 
-            <main className="max-w-7xl mx-auto p-5 w-full flex flex-row gap-6 items-start">
+            <main className="max-w-7xl mx-auto p-5 w-full flex flex-col lg:flex-row gap-6 items-stretch lg:items-start">
 
-                <div className="w-64 shrink-0">
+                <div className="w-full lg:w-64 lg:shrink-0 min-w-0">
                     <CategoryTree
                         selectedCategory={selectedCategory}
                         onCategoryClick={setSelectedCategory}
                     />
                 </div>
 
-                <section className="flex-1 min-w-0 rounded-xl px-8 pt-8 pb-10 bg-white/80 border border-sky-300 shadow-sm min-h-[700px] flex flex-col">
+                <section className="w-full flex-1 min-w-0 rounded-xl px-4 sm:px-8 pt-6 sm:pt-8 pb-8 sm:pb-10 bg-white/80 border border-sky-300 shadow-sm lg:min-h-[700px] flex flex-col">
                     <h3 className="text-2xl font-extrabold text-sky-700 mb-6 border-b-2 border-sky-100 pb-2 tracking-tight">
                         Post
                     </h3>
@@ -97,13 +97,13 @@ const ArchivePage: React.FC = () => {
                     {totalPages > 1 && (
                         <div
                             ref={paginationRef}
-                            className="mt-12 flex justify-center items-center gap-x-2 border-t border-sky-50 pt-8"
+                            className="mt-8 sm:mt-12 flex flex-wrap justify-center items-center gap-2 border-t border-sky-50 pt-6 sm:pt-8"
                         >
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
                                 <button
                                     key={pageNum}
                                     onClick={() => handlePageChange(pageNum)}
-                                    className={`px-4 py-2 rounded-lg font-bold transition-all ${currentPage === pageNum
+                                    className={`min-w-9 px-3 sm:px-4 py-2 rounded-lg font-bold transition-all ${currentPage === pageNum
                                         ? 'bg-sky-600 text-white shadow-md'
                                         : 'bg-white text-sky-600 border border-sky-100 hover:bg-sky-50'
                                         }`}
