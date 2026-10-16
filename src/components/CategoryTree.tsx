@@ -67,6 +67,10 @@ const CategoryTree: React.FC<CategoryTreeProps> = ({ selectedCategory, onCategor
     const [isOpen, setIsOpen] = useState(false);
 
     const isAllSelected = selectedCategory === null;
+    const pickCategory = (category: ICategory | null) => {
+        onCategoryClick(category);
+        setIsOpen(false);
+    };
 
     return (
         <aside className="w-full lg:w-64 lg:min-h-[700px] rounded-xl bg-white/80 border border-sky-300 shadow-sm flex flex-col overflow-hidden">
